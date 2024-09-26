@@ -1,0 +1,30 @@
+.containeropen {
+    width: 200px;
+    height: 100vh;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: rgba(245, 245, 245, 0.986);
+    transition: width 1s ease ; /* Adiciona a transição suave ao abrir */
+    overflow: hidden;
+}
+
+.containerclose {
+    width: 48px;
+    height: 100vh;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: rgba(245, 245, 245, 0.986);
+    transition: width 1s ease; /* Adiciona a transição suave ao fechar */
+}
+
+.icon-menu {
+    display: flex;
+    flex-direction: column; /* ou row, dependendo do seu layout */
+    align-items: center; /* Centraliza os ícones */
+    gap: 10px; /* Espaçamento entre os ícones */
+}
+

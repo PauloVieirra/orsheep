@@ -17,9 +17,10 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Inicialize como falso até verificar o usuário
   const [user, setUser] = useState(null);
   const [pedidos, setPedidos] = useState(null);
+  const [produtos, setProdutos] =useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [error, setError] = useState(null);
-
+ 
   const[isMenuOpen, setIsMenuOpen] = useState(true)
   const navigate = useNavigate();
  
@@ -215,6 +216,9 @@ const cadastrarProduto = async (produto) => {
           .insert([{
               nome: produto.nome,
               preco: produto.preco,
+              precoi: produto.precoi,
+              precoii: produto.precoii,
+              precoiii: produto.precoiii,
               medida: produto.medida,
               curta_descricao: produto.curta_descricao,
               longa_descricao: produto.longa_descricao,
@@ -230,7 +234,26 @@ const cadastrarProduto = async (produto) => {
   }
 };
 
+const fetchProdutos = async () => {
+  try {
+    const { data, error } = await supabase
+      .from('produtos')
+      .select('*');
 
+    if (error) {
+      console.error('Erro ao buscar produtos:', error.message);
+      return;
+    }
+
+    setProdutos(data);
+  } catch (err) {
+    console.error('Erro inesperado ao buscar produtos:', err);
+  }
+};
+
+const handleProdutos = () => {
+  fetchProdutos();
+}
 
 
 const updatePedidoStatus = async (id, newStatus) => {
@@ -260,7 +283,7 @@ useEffect(() => {
 
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, user, isLoading, isMenuOpen, pedidos,error, modalOpen,setModalOpen,cadastrarProduto,fetchItensPedido,updatePedidoStatus,handleMenu,login, logout, signUp, getUserData, handleLoading, fetchUser }}>
+    <AuthContext.Provider value={{ isLoggedIn, user, isLoading, isMenuOpen, pedidos,error, modalOpen, produtos,handleProdutos,setModalOpen,cadastrarProduto,fetchItensPedido,updatePedidoStatus,handleMenu,login, logout, signUp, getUserData, handleLoading, fetchUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -58,6 +58,7 @@ export default function Pedidos() {
     
 
     return (
+        <main> 
         <div className="container">
             <div className="pedidos-container">
                 {loading && <p>Carregando pedidos...</p>}
@@ -124,5 +125,6 @@ export default function Pedidos() {
             
 
         </div>
+        </main>
     );
 }

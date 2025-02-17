@@ -1,18 +1,46 @@
 import React from "react";
+import { useAuth } from "../../context/AuthContext";
+import { IconPedir } from "../Icons";
 import './styles.css';
 
-const BotaoMenu = ({ texto, onClick, icone }) => {
+export function BotaoMenu ({ texto, onClick, icone })  {
+    const {theme} = useAuth();
     return (
         <div className="botao-menu" onClick={onClick}>
             <div className="icon-cont">
             {icone && <span className="icon">{icone}</span>}    
             </div>
-            <div>
+            <div className="textbtn">
             {texto}  
             </div>
-            
         </div>
     );
 };
 
-export { BotaoMenu };
+export function BotaoAddDetalhes (){
+    return(
+        <div>
+
+        </div>
+    );
+}
+
+export function BotaoPedir(){
+    const {theme} = useAuth();
+    return(
+       <button className="btn-pedir" style={{background:theme.buttonPedir}}>
+           <>Pedir</>
+       </button> 
+    );
+}
+
+export function BotaoPedirIcon(){
+    const {theme} = useAuth();
+    return(
+       <button className="btn-pedir" style={{background:theme.buttonPedir}}>
+           <IconPedir/><>Pedir</>
+       </button> 
+    );
+}
+
+

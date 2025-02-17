@@ -1,0 +1,128 @@
+/* Contêiner principal com rolagem vertical */
+.containercardapio {
+    flex: 0 0 auto;  /* Impede os cards de redimensionarem */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto; /* Habilita rolagem apenas na vertical */
+    background-color: rgb(248, 248, 248);
+}
+
+/* Contêiner de rolagem horizontal dos produtos */
+.contoverflow {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    overflow-x: auto; /* Habilita rolagem horizontal */
+    scroll-snap-type: x mandatory; /* Garante que a rolagem pare em um item de cada vez */
+    -webkit-overflow-scrolling: touch; /* Rolagem suave no mobile */
+    align-items: center;
+    gap: 10px;
+    
+    
+}
+
+.contoverflow-simples {
+    display: flex;
+    width: 100%;
+    height: 300px;
+    min-height: 320px;
+    overflow-x: auto; /* Habilita rolagem horizontal */
+    overflow-y: none;
+    scroll-snap-type: x mandatory; /* Garante que a rolagem pare em um item de cada vez */
+    -webkit-overflow-scrolling: touch; /* Rolagem suave no mobile */
+    align-items: center;
+    gap: 10px;
+}
+
+.cont-bebidasalcolicas{
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+.cont-bebidas-alcoolicas{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height:auto;
+    
+}
+
+.item-vermais{
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    height: 32px;
+    align-items: center;
+    padding: 6px;
+}
+
+/* Estilo para cada produto */
+.item {
+    flex: 0 0 auto; /* Impede que o item se expanda, garantindo que ele tenha o tamanho adequado */
+    width: calc(100% / 1.5); /* Define o tamanho de cada item para mostrar 1.5 itens por vez */
+    height: 100%;
+    scroll-snap-align: start; /* Garante que a rolagem pare no início de cada item */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(223, 223, 223, 0.89);
+    
+    border-radius: 6px;
+}
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-color: aliceblue;
+    position: absolute;
+    z-index: 1001;
+    top: 0px;
+    left: 0px;
+}
+
+/* Personalização da barra de rolagem horizontal */
+.contoverflow::-webkit-scrollbar {
+    height: 1px;
+}
+
+.contoverflow::-webkit-scrollbar-thumb {
+    background-color: rgba(228, 17, 17, 0.993);
+    border-radius: 10px;
+}
+
+.contoverflow::-webkit-scrollbar-track {
+    background-color: rgba(211, 211, 211, 0);
+    border-radius: 10px;
+}
+
+.cont-selectcat {
+    display: flex;
+    width: 100%;
+    height: 84px;
+    overflow-x: auto; /* Habilita o scroll horizontal */
+    white-space: nowrap; /* Mantém os botões na mesma linha */
+    gap: 8px; /* Espaço entre os botões */
+    padding: 10px;
+    scrollbar-width: thin; /* Ajusta a largura do scrollbar */
+    scrollbar-color: #10b98100 transparent; /* Cor do scrollbar */
+}
+
+/* Estilizando a barra de rolagem no Chrome e outros navegadores baseados em WebKit */
+.cont-selectcat::-webkit-scrollbar {
+    height: 8px;
+}
+
+.cont-selectcat::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.cont-selectcat::-webkit-scrollbar-thumb {
+    background: #10b981;
+    border-radius: 10px;
+}

@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container-detalhes{
+    display: flex;
+    width: 100%;
+    height:calc(100vh - 60px);
+    flex-direction: column;
+    background-color: rgb(247, 247, 247);
+}
+.cont-detalhesproduto button{
+    display: flex;
+    width: 100%;
+    height:42px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(27, 165, 27);
+    font-size: 18px;
+}
+.cont-imagedetalhe{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 70%;
+    justify-content: flex-end;
+    position: relative;
+   
+}
+.cont-dados-img{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+    justify-content: flex-end;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0px;
+    color: rgb(248, 248, 248);
+    font-size: 28px;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0),rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.411) , rgba(0, 0, 0, 0.801)); 
+}
+.cont-imagedetalhe img{
+    height: 100%;
+    object-fit: cover;
+}
+.cont-detalhesproduto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 30%;
+    padding:16px;
+    gap: 12px;
+} 
+.cont-detalhesproduto section.description{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    color: rgb(27, 27, 27);
+}
+
+.cont-detalhesproduto section.bottoms-detalhes{
+    display: flex;
+    width: 100%;
+    gap: 12px;
+    flex-direction: column;
+}
+
+.cont-detalhesproduto .cont-btns-count{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+} 
+
+.cont-detalhesproduto .cont-btns-count .cont-btnconunt{
+    display: flex;
+    width: 160px;
+    justify-content: flex-end;
+    align-items: center;
+    color: rgb(53, 53, 53);
+
+}
+
+.cont-detalhesproduto .cont-btns-count .cont-btnconunt span{
+    display: flex;
+    width: 38px;
+    justify-content: center;
+    align-items: center;
+    color: rgb(59, 59, 59);
+    font-size: 18px;
+}
+
+.cont-detalhesproduto .cont-btns-count .cont-btnconunt .btnsomar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    font-size: 30px;
+    font-weight: 500;
+    background-color: rgba(134, 134, 134, 0.514);
+    box-shadow: 2px 2px 4px rgba(155, 155, 155, 0.219); /* Sombra maior na direita */
+    transition: box-shadow 0.3s ease-in-out; /* Suaviza a sombra ao passar o mouse */
+}
+
+.cont-valortotal{
+    display: flex;
+    width: 100%;
+    width: auto;
+    height: 42px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    color: rgb(54, 54, 54);
+    font-size: 20px;
+    background-color: rgb(211, 211, 211);
+}
+
+.icon-start{
+   color: rgb(243, 228, 22);
+   font-size: 18px;
+   background-color: rgba(240, 248, 255, 0);
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.btncancelar {
+    background: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btnconfirmar {
+    background: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

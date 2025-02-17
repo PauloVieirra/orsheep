@@ -1,16 +1,98 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import supabase from "../../servers/SupabaseConect";
 import ModalConfirme from "../Confirmemodal";
 import Card from "../Card";
-import './styles.css'; // Para os estilos da lista de pedidos
+import './styles.css'; 
 import '../../App.css';
 
 export default function Pedidos() {
-    const { pedidos, loading, error, setModalOpen, modalOpen, fetchItensPedido, updatePedidoStatus } = useAuth();
+    const { pedidos, loading, error, setModalOpen, modalOpen, fetchItensPedido, updatePedidoStatus, changePlaySound, canPlaySound, handleDeletePedidosPorComanda } = useAuth();
     const [selectedPedido, setSelectedPedido] = useState(null);
     const [itensPedido, setItensPedido] = useState([]);
     const [newStatus, setNewStatus] = useState("");
+    const [searchTerm, setSearchTerm] = useState(""); 
+    const [selectedStatus, setSelectedStatus] = useState("pendente"); 
+    const [comandaInput, setComandaInput] = useState("");
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+    const handleConfirmDelete = () => {
+        handleDeletePedidosPorComanda(comandaInput);
+        setIsDeleteModalOpen(false);
+      };
+   
+    
+    console.log(pedidos);
+
+    const [lastFetchedId, setLastFetchedId] = useState(null); // Para rastrear o último ID
+
+
+   const handlePlay = () => {
+    changePlaySound();
+   }
+    
+
+
+    const playSound = () => {
+        if (canPlaySound) {
+            const audio = new Audio('./alertsound.mp3'); // Altere para o caminho do seu arquivo MP3
+            audio.play().catch(error => {
+                console.error("Erro ao tentar reproduzir o som:", error);
+            });
+        }
+    };
+
+    useEffect(() => {
+        if (pedidos && pedidos.length > 0) {
+            const newPedido = pedidos.find(pedido => pedido.id > lastFetchedId);
+            if (newPedido) {
+                playSound(); // Toca o som se houver um novo pedido
+                setLastFetchedId(newPedido.id); // Atualiza o último ID
+            }
+        }
+    }, [pedidos]); // Monitora apenas a lista de pedidos
+
+    const handleButtonClick = () => {
+       
+    };
+
+    const orderStatuses = {
+        'pendente': 1,
+        'aceito': 2,
+        'entrega': 3,
+        'finalizado': 4,
+        'cancelado': 5,
+    };
+
+    const statusColors = {
+        'pendente': 'rgba(191, 191, 191, 0.5)', 
+        'aceito': 'rgba(101, 199, 130, 0.5)',    
+        'entrega': '#2196f3',   
+        'finalizado': 'rgba(255, 203, 68, 0.5)', 
+        'cancelado': 'rgba(235, 119, 115, 0.5)',  
+    };
+
+    const sortedPedidos = pedidos?.sort((a, b) => {
+        return orderStatuses[a.status] - orderStatuses[b.status];
+    });
+
+    const filteredPedidos = sortedPedidos?.filter((pedido) => {
+        const matchesSearch = 
+            (pedido.nome && pedido.nome.toLowerCase().includes(searchTerm.toLowerCase())) ||  
+            pedido.id.toString().includes(searchTerm);
+        const matchesStatus = 
+            selectedStatus === "todos" || pedido.status === selectedStatus;
+        return matchesSearch && matchesStatus;
+    });
+
+    const statusCounts = {
+        'todos': sortedPedidos?.length,
+        'pendente': sortedPedidos?.filter(pedido => pedido.status === 'pendente').length,
+        'aceito': sortedPedidos?.filter(pedido => pedido.status === 'aceito').length,
+        'entrega': sortedPedidos?.filter(pedido => pedido.status === 'entrega').length,
+        'finalizado': sortedPedidos?.filter(pedido => pedido.status === 'finalizado').length,
+        'cancelado': sortedPedidos?.filter(pedido => pedido.status === 'cancelado').length,
+    };
 
     const handleConfirm = () => {
         console.log("Confirmado!");
@@ -25,13 +107,13 @@ export default function Pedidos() {
     const handleCardClick = async (pedido) => {
         setSelectedPedido(pedido);
         setNewStatus(pedido.status);
-        const itens = await fetchItensPedido(pedido.id); // Busca os itens do pedido
-        setItensPedido(itens); // Atualiza os itens do pedido
+        const itens = await fetchItensPedido(pedido.id); 
+        setItensPedido(itens); 
     };
 
     const handleStatusChange = () => {
         if (selectedPedido) {
-            setModalOpen(true); // Abre o modal
+            setModalOpen(true); 
         }
     };
 
@@ -46,26 +128,74 @@ export default function Pedidos() {
                         .eq('pedido_id', selectedPedido.id);
                     if (error) throw new Error(error.message);
                 }
-                // Limpa a seleção após a atualização
                 setSelectedPedido(null);
                 setItensPedido([]);
             } catch (err) {
                 console.error('Erro ao atualizar status:', err.message);
             }
         }
-        setModalOpen(false); // Fecha o modal após a confirmação
+        setModalOpen(false); 
     };
-    
+
+    const handleStatusSelect = (status) => {
+        setSelectedStatus(status);
+    };
 
     return (
-        <main> 
-        <div className="container">
+        <div className="containerpedidos">
             <div className="pedidos-container">
                 {loading && <p>Carregando pedidos...</p>}
                 {error && <p>Erro: {error}</p>}
-                {pedidos?.length === 0 && !loading && <p>Não há pedidos disponíveis.</p>}
+                {filteredPedidos?.length === 0 && !loading && <p>Não há pedidos disponíveis.</p>}
+                
+                <div className="seashbar">
+                    <input
+                        type="text"
+                        placeholder="Pesquisar por nome ou ID"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    {canPlaySound ? <button onClick={handlePlay}>Desativa Som de Notificação</button> : <button onClick={handlePlay}>Ativar Som de Notificação</button> }
+                     
+                </div>
+                
+                <div className="selecteditens" style={{ display: 'flex', gap: '10px' }}>
+                    {['todos', 'pendente', 'aceito', 'entrega', 'finalizado', 'cancelado'].map(status => (
+                        <div 
+                            key={status} 
+                            className={`carditenselect ${selectedStatus === status ? 'active' : ''}`} 
+                            onClick={() => handleStatusSelect(status)}
+                            style={{
+                                padding: '10px',
+                                cursor: 'pointer',
+                                border: selectedStatus === status ? '2px solid blue' : '1px solid gray',
+                                borderRadius: '5px',
+                                transition: 'background-color 0.3s',
+                                backgroundColor: selectedStatus === status ? '#e0f7fa' : 'white',
+                                transition:'all, 1s ease'
+                            }}
+                        >
+                            {status.charAt(0).toUpperCase() + status.slice(1)} 
+
+                            <div className="status-count" 
+                                style={{
+                                    backgroundColor: statusColors[status] || 'transparent',
+                                    padding: '5px 10px',
+                                    borderRadius: '5px',
+                                    color: '#fff',
+                                    display: 'inline-block',
+                                    marginLeft: '5px',
+                                    fontWeight: 'bold'
+                                }}
+                            >
+                                ({statusCounts[status]})
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
                 <div className="grid">
-                    {pedidos?.length > 0 && pedidos.map((pedido) => (
+                    {filteredPedidos?.map((pedido) => (
                         <Card 
                             key={pedido.id} 
                             pedido={pedido} 
@@ -74,7 +204,7 @@ export default function Pedidos() {
                     ))}
                 </div>
             </div>
-
+            
             <div className="item-update">
                 {selectedPedido ? (
                     <>
@@ -110,21 +240,42 @@ export default function Pedidos() {
                         </ul>
                     </>
                 ) : (
-                    <p>Selecione um pedido para atualizar.</p>
+                    <div className="finalizar-atendimento">
+                        <h3>Finalizar Atendimento</h3>
+                        <p>Digite o número da comanda:</p>
+                        <input
+                            type="text"
+                            value={comandaInput}
+                            onChange={(e) => setComandaInput(e.target.value)}
+                            placeholder="Número da comanda"
+                        />
+                        <button
+                            onClick={() => setIsDeleteModalOpen(true)}
+                            title="Liberar comanda"
+                        >
+                            Liberar comanda
+                        </button>
+                        </div>
                 )}
-            </div>
-            {modalOpen && 
-    <ModalConfirme
-        isOpen={modalOpen}
-        onConfirm={handleConfirmUpdate} // Chama a nova função
-        onCancel={handleCancel}
-        texto={selectedPedido ? `Deseja confirmar o status do pedido ${selectedPedido.id} para '${newStatus}'?` : 'Pedido não selecionado.'}
-    />
-}
+                        {isDeleteModalOpen && (
+                        <ModalConfirme
+                            isOpen={isDeleteModalOpen}
+                            onConfirm={handleConfirmDelete}
+                            onCancel={() => setIsDeleteModalOpen(false)}
+                            texto={`Tem certeza que deseja apagar todos os pedidos da comanda ${comandaInput}?`}
+                        />
+                        )}
 
             
-
+                {modalOpen && 
+                    <ModalConfirme
+                        isOpen={modalOpen}
+                        onConfirm={handleConfirmUpdate}
+                        onCancel={handleCancel}
+                        texto={selectedPedido ? `Deseja confirmar o status do pedido ${selectedPedido.id} para '${newStatus}'?` : 'Pedido não selecionado.'}
+                    />
+                }
+            </div>
         </div>
-        </main>
     );
 }

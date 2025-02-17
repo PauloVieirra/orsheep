@@ -1,24 +1,27 @@
 import React,{useContext} from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
-import HomeScreen from '../Screens/Home';
-import Promocoes from '../Screens/Promocoes';
-import Configuracoes from '../Screens/Configuracoes';
-import Produtos from '../Screens/Produtos';
 import { useAuth } from '../context/AuthContext';
-import Menus from '../Components/Menu';
+import Cardapio from '../Screens/Cardapio';
+import ItemDetalhes from '../Screens/Itensdetalhes';
+import { Conta } from '../Screens/Bills';
+import { Pesquisar } from '../Screens/Pesquisar';
+import ItemBannerDetalhes from '../Screens/IntensBannerDetalhes';
+
 
 
 function AppRoutes  () {
   const {user} = useAuth();
   
   return (
-    <div style={{display:'flex', flexDirection:'row'}}>
-       <Menus/>
+    <div style={{display:'flex', flexDirection:'row', backgroundColor:'#131313'}}>
+     
+    
       <Routes>
-        <Route path="/" element={<HomeScreen/>} />
-        <Route path="/Promocoes" element={<Promocoes/>} />
-        <Route path="/Configuracoes" element={<Configuracoes/>} />
-        <Route path="/Produtos" element={<Produtos/>} />
+        <Route path="/" element={<Cardapio/>} />
+        <Route path="/ItemDetalhes" element={<ItemDetalhes />} />
+        <Route path='/IntensBannerDetalhes' element={<ItemBannerDetalhes/>}/>
+        <Route path="/Pesquisar" element={<Pesquisar/>}/>
+        <Route path="/Conta" element={<Conta/>}/>
       </Routes> 
  
     </div>

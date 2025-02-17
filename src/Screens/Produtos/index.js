@@ -4,15 +4,12 @@ import supabase from "../../servers/SupabaseConect";
 import '../../App.css';
 import './styles.css';
 
-const categorias = ['Tradicionais', 'Detox', 'Maromba', 'Frutas congeladas','Açaí', 'Cremosinho','Produtos naturais', 'Congelados','Outros'];
+const categorias = ['Entradas', 'Pratos Principais', 'Lanches & Sanduíches', 'Pizzas & Focaccias','Sobremesas', 'Bebidas','Bebidas Alcoólicas', 'Opções Veganas & Vegetarianas','happy hour', 'Ofertas'];
 
 export default function CadastroProduto() {
     const { cadastrarProduto, produtos, handleProdutos, } = useAuth(); // Função para cadastrar o produto no contexto
     const [nome, setNome] = useState("");
     const [preco, setPreco] = useState("");
-    const [precoi, setPrecoi] = useState("");
-    const [precoii, setPrecoii] = useState("");
-    const [precoiii, setPrecoiii] = useState("");
     const [medida, setMedida] = useState("kg");
     const [curta_descricao, setCurtaDescricao] = useState("");
     const [longa_descricao, setLongaDescricao] = useState("");
@@ -21,7 +18,7 @@ export default function CadastroProduto() {
     const [categoria, setCategoria] = useState("");
    
     useEffect(() => {
-      handleProdutos(); // Busca o usuário quando o provedor é montado
+      handleProdutos(); // Busca o produto quando o provedor é montado
     }, []);
 
 
@@ -53,7 +50,7 @@ export default function CadastroProduto() {
       console.log("Upload bem-sucedido:", data); // Verifique se o upload foi bem-sucedido
   
       // Construindo a URL pública manualmente
-      const publicURL = `https://pjifjlzafxoiyrjzgipd.supabase.co/storage/v1/object/public/products/${data.path}`;
+      const publicURL = `https://shdhhlszambuowvkfkss.supabase.co/storage/v1/object/public/products/${data.path}`;
       
       console.log("URL pública gerada:", publicURL); // Verifique a URL gerada
       return publicURL; // Retorna a URL pública da imagem
@@ -72,10 +69,7 @@ export default function CadastroProduto() {
             if (url) {
                 await cadastrarProduto({ 
                     nome, 
-                    preco,
-                    precoi, 
-                    precoii, 
-                    precoiii, 
+                    preco, 
                     medida, 
                     curta_descricao, 
                     longa_descricao, 
@@ -86,9 +80,6 @@ export default function CadastroProduto() {
                 // Limpa os campos após o cadastro
                 setNome("");
                 setPreco("");
-                setPrecoi("");
-                setPrecoii("");
-                setPrecoiii("");
                 setMedida("kg");
                 setCurtaDescricao("");
                 setLongaDescricao("");
@@ -121,31 +112,15 @@ export default function CadastroProduto() {
                     <label>Preço:</label>
                     <input type="number" value={preco} onChange={(e) => setPreco(e.target.value)} required />
                 </div>
-                <div>
-                    <label>Desconto % - 1:</label>
-                    <input type="number" value={precoi} onChange={(e) => setPrecoi(e.target.value)} />
-                </div>
-                <div>
-                    <label>Desconto % - 2:</label>
-                    <input type="number" value={precoii} onChange={(e) => setPrecoii(e.target.value)} />
-                </div>
-                <div>
-                    <label>Desconto % - 3:</label>
-                    <input type="number" value={precoiii} onChange={(e) => setPrecoiii(e.target.value)} />
-                </div>
-              
+               
                 <div>
                     <label>Descrição Curta:</label>
-                    <input type="text" value={curta_descricao} onChange={(e) => setCurtaDescricao(e.target.value)} required />
+                    <input type="text" value={curta_descricao} onChange={(e) => setCurtaDescricao(e.target.value)} required maxLength={68} />
                 </div>
                 <div>
                     <label>Descrição Longa:</label>
-                    <textarea value={longa_descricao} onChange={(e) => setLongaDescricao(e.target.value)} required />
+                    <textarea value={longa_descricao} onChange={(e) => setLongaDescricao(e.target.value)} required maxLength={164} />
                 </div>
-
-
-              
-
 
                 <div>
                     <label>Categoria:</label>

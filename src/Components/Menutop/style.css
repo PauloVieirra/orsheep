@@ -1,0 +1,66 @@
+.containertop{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 52px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.containervoltar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 52px;
+    gap: 8px;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    align-items: center;
+    justify-content:flex-start;
+    padding-left: 16px;
+    background-color: rgba(250, 250, 250, 0);
+    color: aliceblue;
+}
+
+.cont-voltar-fixo{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 52px;
+    gap: 32px;
+    align-items: center;
+    justify-content:space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(31, 31, 31);
+}
+
+.cont-voltar-fixo .back{
+    display: flex;
+    align-items: center;
+}
+
+.btn-voltar{
+    background-color: rgba(255, 255, 255, 0);
+}
+.btn-voltar:hover{
+    background-color: rgba(255, 255, 255, 0);
+}
+
+/* Remove qualquer borda ou efeito ao clicar no input */
+.input-pesquisa:focus, 
+.input-pesquisa:active {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+
+
+
+ 

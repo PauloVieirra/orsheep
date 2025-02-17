@@ -1,28 +1,32 @@
-
-.container{
+.containerpedidos {
     display: flex;
     width: 100%;
     flex-direction: row;
 }
+
 .pedidos-container {
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Isso pode estar afetando o grid */
+    flex-direction: column; /* Remova se não for necessário */
     width: 100%;
     height: 100vh;
-    overflow-y: scroll; /* Permite a rolagem */
-    scrollbar-width: none; /* Para Firefox */
+    overflow-y: scroll;
+    background-color: #f3f3f3;
+
 }
+
 
 .pedidos-container::-webkit-scrollbar {
     display: none; /* Para Chrome, Safari e Opera */
 }
 
-
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Colunas responsivas */
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Mínimo de 200px, ocupando até 5 colunas */
     gap: 16px; /* Espaçamento entre os cartões */
+    margin-top: 30px;
 }
+
 
 /* Estilo adicional para os cartões */
 .card {
@@ -38,12 +42,16 @@
     transform: scale(1.05);
 }
 
+.contitem {
+    width: auto;
+}
+
 .item-update {
     display: flex;
     flex-direction: column; /* Alinha os itens em coluna */
     width: 400px;
     height: auto; /* Ajuste a altura para auto */
-    background-color: #ccc;
+    background-color: #fff;
     padding: 20px; /* Adiciona um padding para espaçamento interno */
     border-radius: 8px; /* Opcional: para bordas arredondadas */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Opcional: sombra suave */
@@ -65,4 +73,43 @@
 .item-update button {
     margin-top: 10px; /* Margem superior para espaçamento */
 }
-
+.selecteditens{
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+.selecteditens:hover{
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+.carditenselect{
+    width: 96px;
+    height: 96px;
+    background-color: #fff;
+    margin: 10px;
+    border-radius: 8px;
+    transition: all 0.5s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Opcional: sombra suave */
+}
+.carditenselect:hover{
+    transform: scale(1.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Opcional: sombra suave */
+}
+.seashbar{
+    display: flex;
+    width: 100%;
+    height: auto;
+    background-color: #ccc;
+    padding: 16px;
+    align-items: center;
+    justify-content: start;
+    
+}
+.seashbar input{
+    width: 40%;
+    height: 38px;
+    border-radius: 8px;
+    border-width: 0px;
+    padding-left: 16px;
+}

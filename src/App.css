@@ -1,3 +1,29 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 .App {
   text-align: center;
 }
@@ -11,8 +37,52 @@
   display: flex;
   width: 100vw;
   height: '100%';
-  background-color: rgba(219, 219, 219, 0.548);
+  background-color: rgb(255, 255, 255);
 }
+
+.categoria-titulos{
+  display: flex;
+  width: 100%;
+  height: 32px;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1c1e22;
+  margin-top: 20px;
+  margin-bottom: 2px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.text-card-titulos{
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1c1e22;
+}
+
+.modallay{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  top:0px;
+  left: 0px;
+  background-color: #38383859;
+}
+.modalent{
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  padding: 30px;
+  background-color: aliceblue;
+  border-radius: 12px;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -43,3 +113,5 @@
     transform: rotate(360deg);
   }
 }
+
+

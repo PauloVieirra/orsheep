@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container-detalhes-Banner{
+    display: flex;
+    width: 100%;
+    height:100vh;
+    justify-content: space-between;
+    flex-direction: column;
+    padding-bottom: 60px;
+    background-color: aliceblue;
+}
+.container-detalhes-Banner .container-detalhes{
+    display: flex;
+    width: 100%;
+    height:100%;
+    padding: 10px;
+    flex-direction: column;
+}
+.container-detalhes-Banner .bannercont-imagedetalhe{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    justify-content: flex-end;
+    position: relative;
+    background-image: linear-gradient(to bottom, rgba(20, 20, 20, 0.219), rgba(0, 0, 0, 0.521) , rgba(0, 0, 0, 0.801)); 
+}
+
+.container-detalhes-Banner .bannercont-imagedetalhe span{
+    display: flex;
+    color: rgb(238, 238, 238);
+    width: 50%;
+    background-color: rgba(240, 248, 255, 0);
+    
+
+} 
+
+
+.container-detalhes-Banner .container-detalhes .banner-price{
+    display: flex;
+    width: 100%;
+    height: 42px;
+    font-size: 20px;
+    font-weight: 500;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-detalhes-Banner .container-detalhes .description{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    color: rgb(27, 27, 27);
+}
+
+.container-detalhes-Banner .container-detalhes .cont-btnscount{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-top: 16px;
+    padding-bottom: 8px;
+    justify-content: space-between;
+}
+
+.container-detalhes-Banner .container-detalhes .bottoms-detalhes .cont-btnscount .cont-btnsomar{
+    display: flex;
+    width: 160px;
+    justify-content: flex-end;
+    align-items: center;
+    color: rgb(53, 53, 53);
+}
+
+
+.container-detalhes-Banner .container-detalhes .bottoms-detalhes .cont-btnscount .cont-btnsomar .btnsomar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    font-size: 30px;
+    font-weight: 500;
+    background-color: rgba(134, 134, 134, 0.514);
+    box-shadow: 2px 2px 4px rgba(155, 155, 155, 0.219); /* Sombra maior na direita */
+    transition: box-shadow 0.3s ease-in-out; /* Suaviza a sombra ao passar o mouse */
+}
+
+.container-detalhes-Banner .container-detalhes .bottoms-detalhes .cont-btnscount .cont-btnsomar .cont-bannerquantidade{
+    display: flex;
+    width: 38px;
+    justify-content: center;
+    align-items: center;
+    color: rgb(59, 59, 59);
+    font-size: 18px;
+}
+
+.container-detalhes-Banner .container-detalhes .cont-btnpedir{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 16px;
+}
+
+.container-detalhes-Banner .container-detalhes .cont-btnpedir .btnpedir{
+    display: flex;
+    flex-direction: row;
+    height: 42px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+

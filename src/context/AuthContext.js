@@ -250,6 +250,7 @@ const login = async (email, password) => {
       setLoading(false);
     }
   };
+
   
   
   const logout = async () => {
@@ -262,6 +263,7 @@ const login = async (email, password) => {
       setIsLoggedIn(false);
       await localforage.removeItem('user'); // Remover os dados locais
       await localforage.removeItem( 'cliente');
+      navigate("/SignIn");
       console.log('Usuário deslogado com sucesso.');
     } catch (error) {
       console.error('Erro ao fazer logout:', error.message);

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useAuth } from "../../context/AuthContext";
+import './style.css';
 
 export default function SigninScreen() {
   const { login } = useAuth(); // Desestrutura a função de login do contexto
@@ -19,9 +20,13 @@ export default function SigninScreen() {
   };
 
   return (
-    <div>
-      <h2>Tela de Login</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="container-signin">
+      <div className="container-signintop">
+        <h2>Tela de Login</h2>
+      </div>
+      
+      <div className="formulario-signin"> 
+      <form onSubmit={handleSubmit} >
         <div>
           <label>Email:</label>
           <input
@@ -43,6 +48,7 @@ export default function SigninScreen() {
         {error && <p style={{ color: "red" }}>{error}</p>}
         <button type="submit">Entrar</button>
       </form>
+      </div>
     </div>
   );
 }

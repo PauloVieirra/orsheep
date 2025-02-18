@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import localforage from "localforage";
+import './style.css';
 
 const Scan = () => {
   const [searchParams] = useSearchParams();
@@ -56,12 +57,11 @@ const Scan = () => {
   // Se não houver mesa identificada
   if (!mesa) {
     return (
-      <div>
-        <h1>Erro: Nenhuma mesa identificada</h1>
-        <p>Por favor, escaneie o QR Code da mesa em que está sentado.</p>
-
-        <button onClick={() => navigate('/SignIn')}
-        />
+      <div className="container-scan">
+       <section className="sect-mansagem"> 
+        <h1>Nenhuma mesa identificada</h1>
+        <p>Por favor, feche essa pagina, abra sua camera e escaneie o QR Code da mesa em que está sentado.</p>
+       </section>
       </div>
     );
   }
@@ -73,13 +73,19 @@ const Scan = () => {
             <h1>Bem-vindo ao Restaurante</h1>
             <p>Mesa: {mesa}</p>
             <p>Comanda: {comanda}</p>
+
             <h3>Redirecionando para o cardápio...</h3>
         </>
        ):(
         <>
-        <div>
-          <h1>Obrigado, volte sempre</h1>
-          <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Beaming%20Face%20with%20Smiling%20Eyes.png" alt="Beaming Face with Smiling Eyes" width="25" height="25" />
+        <div className="container-thanks">
+          
+          <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Beaming%20Face%20with%20Smiling%20Eyes.png" alt="Beaming Face with Smiling Eyes"/>
+        
+        <h3>Obrigado, volte sempre!!!</h3>
+        <div className="container-despedida">
+          Agradecemos imensamento por usar nosso servico, lembre-se, e sempre um prazer te ter por aqui.
+        </div>
         </div>
         </>
        )}

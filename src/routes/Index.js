@@ -30,7 +30,7 @@ const AppRoutesControl = () => {
       )}
 
       {/* Se não for admin e tentar acessar "/admin", redireciona para a home */}
-      {!isAdmin && <Route path="/admin/*" element={<Navigate to="/" />} />}
+      {!isAdmin && <Route path="/*" element={<Navigate to="/signin" />} />}
     </Routes>
   );
 };

@@ -84,7 +84,7 @@ const Scan = () => {
         
         <h3>Obrigado, volte sempre!!!</h3>
         <div className="container-despedida">
-          Agradecemos imensamento por usar nosso servico, lembre-se, e sempre um prazer te ter por aqui.
+          Agradecemos imensamente por usar nosso serviço. Lembre-se, é sempre um prazer tê-lo por aqui.
         </div>
         </div>
         </>

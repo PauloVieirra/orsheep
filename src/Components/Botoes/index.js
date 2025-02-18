@@ -43,4 +43,27 @@ export function BotaoPedirIcon(){
     );
 }
 
+export function BotaoMenuSide({text, link}){
+    const {theme} = useAuth();
+    return(
+        <button className="btnMenuSide">
+            <a href={link} style={{color: theme.textGeral}} >{text}</a>
+        </button>
+    );
+}
+
+export function BotaoPriceBanner({text}){
+    const {theme} = useAuth();
+    return(
+        <div className="btnPriceBanner"
+        style={{
+            color: theme.textGeral,
+            background: theme.btnPriceBannerBackground,
+            borderColor: theme.borderBtnPriceBanner
+            }}>
+             {text}
+        </div>
+    );
+}
+
 

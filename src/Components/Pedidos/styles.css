@@ -113,3 +113,26 @@
     border-width: 0px;
     padding-left: 16px;
 }
+.modal-pedidos{
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-color: #3d3d3d4b;
+}
+.modal-pedidos .content{
+    display: flex;
+    width: auto;
+    height: auto;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #f3f3f3;
+}

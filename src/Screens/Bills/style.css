@@ -4,7 +4,6 @@
   width: 100%;
   height: 100vh;
   background: #faf7df;
-  border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   font-family: 'Courier New', Courier, monospace;
   border: 2px dashed #ccc;
@@ -90,4 +89,42 @@
       #ccc 5px,
       #ccc 10px
   );
+}
+
+.modal-pedirconta{
+  display: flex;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(39, 39, 39, 0.719);
+}
+
+.modal-pedirconta .content{
+  display: flex;
+  position: relative;
+  width: auto;
+  height: auto;
+}
+
+.modal-pedirconta .modal-content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 240px;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+}
+.modal-pedirconta .content .modal-content .modal-close{
+  display: flex;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  justify-content: flex-end;
+  top: 0px;
+  right: 0px;
+  padding: 12px;
 }

@@ -57,7 +57,7 @@ export default function Cardapio() {
                         alignItems:'center',
                         justifyContent:'center',
                         background: "rgba(211, 211, 211, 0.06)",
-                        color:"#000",
+                        color:theme.textGeral,
                         padding: "10px",
                         fontSize:  !filtroCategoria ? "14px" : "12px",
                         fontWeight: !filtroCategoria  ? "600" : "400",
@@ -84,7 +84,7 @@ export default function Cardapio() {
                             alignItems:'center',
                             justifyContent:'center',
                             background: filtroCategoria === cat.nome ? "rgba(92, 184, 92, 0)" : "rgba(211, 211, 211, 0.06)",
-                            color: filtroCategoria === cat.nome ? "#000" : "#000",
+                            color: filtroCategoria === cat.nome ? theme.textGeral : theme.textGeral,
                             padding: "10px",
                             fontSize: filtroCategoria === cat.nome ? "14px" : "12px",
                             fontWeight: filtroCategoria === cat.nome ? "600" : "400",
@@ -183,12 +183,7 @@ export default function Cardapio() {
             {/* Menu Lateral */}
             {isMenuOpen && <MenuSide />}
 
-            {/* Botão de Sair */}
-            <div style={{ width: "100%", height: "42px", textAlign: "center" }}>
-                <button title="Sair" onClick={logout} style={{ background: "#ff4d4d", color: "#fff", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer" }}>
-                    Sair
-                </button>
-            </div>
+           
 
         </div>
     );

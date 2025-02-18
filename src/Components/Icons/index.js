@@ -5,6 +5,7 @@ import { RiFilePaper2Line } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import { FiMenu } from "react-icons/fi";
 import { PiCallBellBold } from "react-icons/pi";
+import { FaWindowClose } from "react-icons/fa";
 import './style.css';
 
 
@@ -16,8 +17,9 @@ export function IconVoltar () {
 }
 
 export function IconVoltarBlack () {
+    const{theme}=useAuth();
     return(
-        <BsArrowLeft size={24} color="#000"/>
+        <BsArrowLeft size={24} color={theme.textGeral}/>
     );
 }
 
@@ -36,8 +38,9 @@ export function IconBills () {
 }
 
 export function IconSearch () {
+    const{theme}=useAuth();
     return(
-        <CiSearch size={24} color="#000"/>
+        <CiSearch size={24} color={theme.textGeral}/>
     );
 }
 
@@ -111,5 +114,10 @@ export function IconPedir () {
     return(
         <PiCallBellBold />
     );
-    
+}
+
+export function IconClose () {
+    return(
+        <FaWindowClose className="icon-close"/>
+    );
 }

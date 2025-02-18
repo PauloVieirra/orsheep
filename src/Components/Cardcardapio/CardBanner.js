@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { BotaoPedir } from "../Botoes";
+import { BotaoPriceBanner } from "../Botoes";
 import "./style.css";
 
 export function Card({ produto }) {
@@ -15,20 +15,25 @@ export function Card({ produto }) {
     
 
     return (
-        <div className="card-banner" style={{ background: theme.backgroundCard }} onClick={handleDetalhes} >
+        <div className="card-banner"   onClick={handleDetalhes} >
               {!imageLoaded && (
                     <div className="skeleton-img"></div>
                 )}
+            <div className="newbbaner" style={{ background: theme.backgroundCard, boxShadow:theme.sombraCardSimple }}> 
             <img src={produto?.imagem_url} 
             alt={produto?.nome} 
             className={`cards-img ${imageLoaded ? "show" : "hide"}`}
             onLoad={() => setImageLoaded(true)}
             />
+            </div>
             <div className="into-banner">
                {imageLoaded &&
-               <span>{produto.nome}</span>
+               <span style={{color:theme.textGeral}}>{produto.nome}</span>
                }
+                <BotaoPriceBanner text={produto?.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} />
             </div>
+           
+
         </div>
     );
 }

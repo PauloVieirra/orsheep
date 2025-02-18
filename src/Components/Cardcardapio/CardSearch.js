@@ -1,10 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import { FaStar } from "react-icons/fa6";
 import './style.css';
 
 export function Card({ produto }) {
-
+    const {theme} = useAuth();
     const navigate = useNavigate();
 
     const handleDetalhes = () => {
@@ -14,7 +15,7 @@ export function Card({ produto }) {
 
 
     return (
-        <div className="card-search" onClick={handleDetalhes}>
+        <div className="card-search" style={{boxShadow:theme.sombraCardSimple}} onClick={handleDetalhes}>
 
             <img src={produto?.imagem_url} style={{ margin: '0px' }} />
 

@@ -14,25 +14,23 @@ export function Card({ produto  }) {
         navigate('/ItemDetalhes', { state: { produto } });
     };
 
-
-
     return (
-        <div className="card-simples" onClick={handleDetalhes} style={{background:theme.backgroundCard}}>
+        <div className="card-simples" onClick={handleDetalhes} style={{background:theme.backgroundCard, boxShadow:theme.sombraCardSimple}}>
 
             <img src={produto?.imagem_url} style={{ margin: '0px' }} />
 
             <section className="cont-card">
-                <section className="text-card-titulos">
+                <section className="text-card-titulos" style={{color:theme.textGeral}}>
                     {produto?.nome} <div><FaStar className="icon-start"/> 4.5</div>
                 </section>
-                <section className="dados">
+                <section className="dados" style={{color:theme.textGeral}}>
                     {produto?.curta_descricao}
                 </section>
             </section>
 
             <div className="cont-price-pedir"> 
 
-            <section className="card-price">
+            <section className="card-price" style={{color:theme.textGeral}}>
                {produto?.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                <BotaoPedirIcon/>  
             </section>

@@ -63,13 +63,13 @@ export function Menuvoltar () {
 }
 
 export function VoltarFixo () {
-    const { produtos, handleProdutos, cliente, user, logout, toggleBillsModal } = useAuth();
+    const { theme } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
 
     return(
         <div className="cont-voltar-fixo">
-            <section className="back"> 
+            <section className="back" style={{color:theme.textGeral}}> 
            <button onClick={() => navigate(-1)} className="btn-voltar">
             <IconVoltarBlack/> 
            </button>

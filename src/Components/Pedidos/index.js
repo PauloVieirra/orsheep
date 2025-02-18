@@ -15,6 +15,7 @@ export default function Pedidos() {
     const [selectedStatus, setSelectedStatus] = useState("pendente"); 
     const [comandaInput, setComandaInput] = useState("");
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const handleConfirmDelete = () => {
         handleDeletePedidosPorComanda(comandaInput);
@@ -141,12 +142,24 @@ export default function Pedidos() {
         setSelectedStatus(status);
     };
 
+    
+
     return (
         <div className="containerpedidos">
             <div className="pedidos-container">
                 {loading && <p>Carregando pedidos...</p>}
                 {error && <p>Erro: {error}</p>}
-                {filteredPedidos?.length === 0 && !loading && <p>Não há pedidos disponíveis.</p>}
+                {filteredPedidos?.length === 0 && !loading && 
+              <>
+              {showModal && (
+                <div className="modal-pedidos">
+                  <div className="content">
+                    <p>Não há pedidos disponíveis.</p>
+                  </div>
+                </div>
+              )}
+             </>
+                }
                 
                 <div className="seashbar">
                     <input
@@ -235,7 +248,10 @@ export default function Pedidos() {
                                     {item.nome} - {item.quantidade} x R$ {item.preco_unitario.toFixed(2)} (Subtotal: R$ {(item.quantidade * item.preco_unitario).toFixed(2)})
                                 </li>
                             )) : (
-                                <p>Não há itens para este pedido.</p>
+                                <div>
+                                    <p>Não há itens para este pedido.</p> 
+                                </div>
+                               
                             )}
                         </ul>
                     </>

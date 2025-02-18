@@ -9,6 +9,8 @@
 .pesquisar-container .cont-itens{
   display: flex;
   width: 100%;
+  overflow-x: auto;
+  scrollbar-width:none;
 }
 
 .input-pesquisa:focus {

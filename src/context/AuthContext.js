@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [error, setError] = useState(null);
   const [lastFetchedId, setLastFetchedId] = useState(null);
-  const[isMenuOpen, setIsMenuOpen] = useState(false)
+  const[isMenuOpen, setIsMenuOpen] = useState(true)
   const [billsOpen, setIsBillsOopen] = useState(null);
   const [cart,setCart] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);

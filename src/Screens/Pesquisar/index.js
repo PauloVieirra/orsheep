@@ -8,7 +8,7 @@ import './style.css';
 
 export function Pesquisar() {
     const location = useLocation();
-    const { produtos } = useAuth();
+    const { produtos, theme } = useAuth();
 
     // Pegando a categoria enviada pelo botão "Ver mais"
     const categoriaSelecionada = location.state?.categoria || "";
@@ -36,21 +36,22 @@ export function Pesquisar() {
     }, [termoPesquisa, produtos, categoriaSelecionada]);
 
     return (
-        <div className="pesquisar-container">
+        <div className="pesquisar-container" style={{background:theme.background}}>
             <VoltarFixo/>
            <div className="cont-search"> 
-                <section className="cont-input-search"> 
+                <section className="cont-input-search" style={{backgroundColor:theme.backgroundCard}}> 
                     <div style={{display:'flex', height:'100%', alignItems:'center'}}>
                         <IconSearch/>
                     </div>
                     <input 
                         placeholder="Pesquisar" 
                         value={termoPesquisa}
+                        style={{color:theme.textGeral}}
                         onChange={(e) => setTermoPesquisa(e.target.value)}
                     />
                 </section>
            </div>
-            <div className="categoria-titulos">
+            <div className="categoria-titulos" style={{color:theme.textGeral}}>
                 <span>{categoriaSelecionada}</span>
             </div>
             <div className="cont-itens">

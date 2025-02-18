@@ -2,15 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { VoltarFixo } from "../../Components/Menutop";
 import supabase from "../../servers/SupabaseConect";
+import { IconClose } from "../../Components/Icons";
 import "./style.css";
 
 export function Conta() {
-    const { cliente, configuracao } = useAuth();
+    const { cliente, configuracao, logout } = useAuth();
     const [pedidos, setPedidos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [modalConta, setModalConta] = useState(false);
 
     console.log("Configuração:", configuracao); // Para depuração
+
+    const handlePedirConta = () => {
+        setModalConta((prev) => !prev);
+    }
 
     useEffect(() => {
         async function fetchPedidos() {
@@ -98,9 +104,23 @@ console.log("Serviço (%):", configuracao?.servico);
                 </div>
             )}
 
-            <div className="cont-btn-pedirconta">
+            <div className="cont-btn-pedirconta" onClick={handlePedirConta}>
                 <button>Pedir Conta</button>
             </div>
+           { modalConta && 
+            <div className="modal-pedirconta">
+                <div className="content">
+                <div className="modal-content">
+                    <span>Pedir sua conta</span>
+                    <button onClick={logout} className="btn-modal-pedirconta">Sim, pedir minha conta ?</button>
+                    <div className="modal-close" >
+                    <div onClick={handlePedirConta}><IconClose/></div> 
+                    </div>
+                        
+                 </div>
+                </div>
+            </div>
+            }
         </div>
     );
 }

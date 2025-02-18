@@ -55,7 +55,7 @@ const Scan = () => {
   }
 
   // Se não houver mesa identificada
-  if (!mesa) {
+  /*if (!cliente) {
     return (
       <div className="container-scan">
        <section className="sect-mansagem"> 
@@ -64,7 +64,7 @@ const Scan = () => {
        </section>
       </div>
     );
-  }
+  }*/
 
   return (
     <div>

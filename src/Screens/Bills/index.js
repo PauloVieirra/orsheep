@@ -78,7 +78,7 @@ export function Conta() {
                 </div>
             ) : (
                 <div className="cont-bills">
-                    
+
                     <div className="cont-list-itens">
                         <ul>
                             {pedidos.map((item, index) => (
@@ -90,20 +90,20 @@ export function Conta() {
                                 </li>
                             ))}
                         </ul>
+                        Fim da nota....
                     </div>
 
 
                     <div className="cont-totais">
-                        <div style={{ fontSize: '18px', fontWeight: '700', marginTop: '100px' }}> Subtotal: R$ {totalPedidos.toFixed(2)} </div>
-                       <div>
+                        <div style={{ fontSize: '18px', fontWeight: '700' }}> Subtotal: R$ {totalPedidos.toFixed(2)} </div>
 
-                       <p>+ Serviço ({configuracao?.servico}%): R$ {taxaServico.toFixed(2)}</p>
-                      {configuracao?.cover && <p>+ Cover: R$ {taxaCover.toFixed(2)}</p>}
-
-                       <div style={{ fontSize: '18px', fontWeight: '700', marginTop: '40px' }}> Valor Total: R$ {totalFinal.toFixed(2)} </div>
-                       </div>
-
-
+                        <div>
+                            <p>+ Serviço ({configuracao?.servico}%): R$ {taxaServico.toFixed(2)}</p>
+                            {configuracao?.cover && <p>+ Cover: R$ {taxaCover.toFixed(2)}</p>}
+                        </div>
+                        <div style={{ fontSize: '18px', fontWeight: '700' }}>
+                            Valor Total: R$ {totalFinal.toFixed(2)}
+                        </div>
 
 
                         <div className="cont-btn-pedirconta" onClick={handlePedirConta}>
@@ -132,9 +132,6 @@ export function Conta() {
                     </div>
                 </div>
             }
-
-            <Footer />
-
         </div>
 
 

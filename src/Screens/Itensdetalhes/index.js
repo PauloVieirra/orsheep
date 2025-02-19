@@ -45,7 +45,7 @@ export default function ItemDetalhes() {
                             <FaStar className="icon-start" />
                             <FaRegStarHalfStroke className="icon-start" />
                             <FaRegStar className="icon-start" />
-                            <div style={{ fontSize: "18px", marginLeft: "8px" }}>3.5</div>
+                            <div style={{ fontSize: "18px", marginLeft: "8px" }}>{produto.avaliacao}</div>
                         </div>
                         <>R$ {produto.preco.toFixed(2)}</>
                     </div>

@@ -35,7 +35,7 @@ export function Card({ produto }) {
       </div>
       <section className="card-into">
         <section className="text-card-titulos" style={{ color: theme.textGeral }}>
-          {produto?.nome} <div><FaStar className="icon-start" /> 4.5</div>
+          {produto?.nome} <div><FaStar className="icon-start" /> {produto.avaliacao}</div>
         </section>
         <section className="dados" style={{ color: theme.textLeitura }}>
           {produto?.curta_descricao}

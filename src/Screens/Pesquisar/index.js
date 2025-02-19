@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { VoltarFixo } from "../../Components/Menutop";
+import { MenuVoltarF } from "../../Components/Menutop";
 import { CardSearch } from "../../Components/Cardcardapio/CardSearch";
 import { IconSearch } from "../../Components/Icons";
 import { Footer } from "../../Components/Footer";
@@ -38,8 +38,8 @@ export function Pesquisar() {
 
     return (
         <div className="pesquisar-container" style={{background:theme.background}}>
-             <div>
-            <VoltarFixo/>
+           
+            <MenuVoltarF/>
            <div className="cont-search"> 
                 <section className="cont-input-search" style={{backgroundColor:theme.backgroundCard}}> 
                     <div style={{display:'flex', height:'100%', alignItems:'center'}}>
@@ -59,7 +59,7 @@ export function Pesquisar() {
             <div className="cont-itens">
                 <CardSearch produtos={produtosFiltrados} />
             </div>
-            </div>
+          
             <Footer/>
         </div>
     );

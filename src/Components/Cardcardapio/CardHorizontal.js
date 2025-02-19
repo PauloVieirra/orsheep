@@ -17,30 +17,30 @@ export function Card({ produto }) {
 
 
   return (
-    <div className="card-horizontal" style={{ background: theme.backgroundCard, boxShadow:theme.sombraCardSimple }} onClick={handleDetalhes}>
+    <div className="card-horizontal" style={{ background: theme.backgroundCard, boxShadow: theme.sombraCardSimple }} onClick={handleDetalhes}>
 
       <div>
         {!imageLoaded && (
           <div className="skeleton-img"></div>
         )}
-        <div> 
-        <img
-          src={produto?.imagem_url}
-          className={`cards-img ${imageLoaded ? "show" : "hide"}`}
-          onLoad={() => setImageLoaded(true)}
-          style={{ margin: '0px' }}
-          alt={produto?.nome}
-        />
-      </div>
+        <div>
+          <img
+            src={produto?.imagem_url}
+            className={`cards-img ${imageLoaded ? "show" : "hide"}`}
+            onLoad={() => setImageLoaded(true)}
+            style={{ margin: '0px' }}
+            alt={produto?.nome}
+          />
+        </div>
       </div>
       <section className="card-into">
-        <section className="text-card-titulos" style={{color:theme.textGeral}}>
+        <section className="text-card-titulos" style={{ color: theme.textGeral }}>
           {produto?.nome} <div><FaStar className="icon-start" /> 4.5</div>
         </section>
-        <section className="dados" style={{color:theme.textLeitura}}>
+        <section className="dados" style={{ color: theme.textLeitura }}>
           {produto?.curta_descricao}
         </section>
-        <section className="card-price" style={{color:theme.textGeral}}>
+        <section className="card-price" style={{ color: theme.textGeral }}>
           {produto?.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
           <BotaoPedirIcon />
         </section>

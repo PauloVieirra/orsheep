@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { IconVoltar } from "../Icons";
-import { IconVoltarBlack } from "../Icons";
+import { IconVoltarBlack, IconVoltarWhite, IconVoltarFlex } from "../Icons";
 import { IconBills } from "../Icons";
 import { IconMenu } from "../Icons";
 import { MenuSide } from "../../Screens/Menulateral";
@@ -41,39 +41,54 @@ export function Menutop() {
                 </div>
 
             </div>
-
-
         </>
     );
 };
 
-export function Menuvoltar() {
+export function MenuVoltarB() {
     const { produtos, handleProdutos, cliente, user, logout, toggleBillsModal } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
 
     return (
-        <div className="containervoltar">
+        <div className="containervoltarF">
+            <section className="backbanner">
             <button onClick={() => navigate(-1)} className="btn-voltar">
-                <IconVoltar />
+                <IconVoltarBlack />
             </button>
-            Voltar
+            </section>
         </div>
     );
 }
 
-export function VoltarFixo() {
+export function MenuVoltarW() {
     const { theme } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
 
     return (
-        <div className="cont-voltar-fixo">
-            <section className="back" style={{ color: theme.textGeral }}>
+        <div className="containervoltarF">
+            <section className="backbanner">
                 <button onClick={() => navigate(-1)} className="btn-voltar">
-                    <IconVoltarBlack />
+                    <IconVoltarWhite/>
                 </button>
                 Voltar
+            </section>
+        </div>
+    );
+}
+
+export function MenuVoltarF() {
+    const { theme } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    return (
+        <div className="containervoltarF">
+            <section className="backbanner" style={{background:theme.backgroundBtnBanner}}>
+                <button onClick={() => navigate(-1)} className="btn-voltar">
+                    <IconVoltarFlex/>
+                </button>
             </section>
         </div>
     );

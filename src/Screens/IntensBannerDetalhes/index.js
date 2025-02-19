@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { FaStar, FaRegStarHalfStroke, FaRegStar } from "react-icons/fa6";
-import { Menuvoltar } from "../../Components/Menutop";
+import { MenuVoltarF } from "../../Components/Menutop";
 import { useAuth } from "../../context/AuthContext";
 import "./style.css";
 
 export default function ItemBannerDetalhes() {
-    const { setSelectedProduct, setQuantidade, quantidade, confirmarPedido } = useAuth();
+    const { setSelectedProduct, setQuantidade, quantidade, confirmarPedido, theme, statusPedido } = useAuth();
     const location = useLocation();
     const { produto } = location.state || {};
 
@@ -27,8 +27,8 @@ export default function ItemBannerDetalhes() {
     };
 
     return (
-        <div className="container-detalhes-Banner">
-           <Menuvoltar/>
+        <div className="container-detalhes-Banner" style={{background:theme.background}}>
+           <MenuVoltarF/>
             
             <div className="bannercont-imagedetalhe">
 
@@ -42,8 +42,10 @@ export default function ItemBannerDetalhes() {
             </div>
 
             <div className="container-detalhes">
-               <div className="banner-price">
+               <div className="banner-price" style={{color:theme.textGeral}}> 
+
                 R$ {produto.preco.toFixed(2)}
+
                 <div style={{ display: "flex", paddingTop: "8px", justifyContent: "space-between" }}>
                         <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
                             <FaStar className="icon-start" />
@@ -56,7 +58,7 @@ export default function ItemBannerDetalhes() {
                 </div>
                 </div>
 
-                <div className="description">
+                <div className="description" style={{color:theme.textGeral}}>
                     {produto.longa_descricao}
                 </div>
 
@@ -76,7 +78,7 @@ export default function ItemBannerDetalhes() {
                             >
                                 -
                             </button>
-                            <div className="cont-bannerquantidade">{quantidade}</div>
+                            <div className="cont-bannerquantidade" style={{color:theme.textGeral}}>{quantidade}</div>
                             <button 
                                 className="btnsomar" 
                                 onClick={() => setQuantidade((q) => q + 1)}
@@ -102,8 +104,12 @@ export default function ItemBannerDetalhes() {
                 <div className="modal">
                     <div className="modal-content">
                         <h2>Confirmar Pedido</h2>
-                        <p>Você está pedindo <strong>{quantidade}</strong>x <strong>{produto.nome}</strong>.</p>
-                        <p>Valor total: <strong>R$ {(produto.preco * quantidade).toFixed(2)}</strong></p>
+                        <p>
+                            Você está pedindo <strong>{quantidade}</strong>x <strong>{produto.nome}</strong>.
+                        </p>
+                        <p>
+                            Valor total: <strong>R$ {(produto.preco * quantidade).toFixed(2)}</strong>
+                        </p>
 
                         <div className="modal-buttons">
                             <button className="btncancelar" onClick={() => setIsModalOpen(false)}>Cancelar</button>
@@ -112,6 +118,18 @@ export default function ItemBannerDetalhes() {
                     </div>
                 </div>
             )}
+
+
+
+
+            {statusPedido && (
+                <div className="modal-enviado">
+                    <div className="pedido-enviado">
+                      <span>  Pedido enviado com sucesso!  </span>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }

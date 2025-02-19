@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
   const [billsOpen, setIsBillsOopen] = useState(null);
   const [cart,setCart] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [statusPedido, setStatusPedido] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [canPlaySound, setCanPlaySound] = useState(false);
   const [quantidade, setQuantidade] = useState(1);
@@ -411,10 +412,19 @@ const confirmarPedido = async () => {
     // Adiciona ao carrinho local
     setCart((prevCart) => [...prevCart, novoPedido]);
     setQuantidade(1);
-
-    // Fecha o modal
+     
+   
     setIsModalOpen(false);
     setSelectedProduct(null);
+    // Seta confirmar como true
+    setStatusPedido(true);
+
+    // Aguarda 3 segundos antes de fechar o modal e resetar o estado
+    setTimeout(() => {
+      setStatusPedido(false);
+     
+    }, 3000);
+
   } catch (err) {
     console.error("Erro inesperado ao confirmar pedido:", err);
   }
@@ -545,6 +555,7 @@ const toggleTheme = async () => {
     theme,
     themeName,
     configuracao,
+    statusPedido,
     toggleTheme,
     handleDeletePedidosPorComanda,
     setQuantidade,

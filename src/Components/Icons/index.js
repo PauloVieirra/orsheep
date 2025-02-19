@@ -42,17 +42,24 @@ export function IconLinkedin() {
     );
 }
 
-export function IconVoltar() {
+export function IconVoltarFlex() {
     const { theme } = useAuth();
     return (
-        <BsArrowLeft size={24} color="#fff" />
+        <BsArrowLeft size={24} color={theme.iconsColors} />
     );
 }
 
 export function IconVoltarBlack() {
     const { theme } = useAuth();
     return (
-        <BsArrowLeft size={24} color={theme.textGeral} />
+        <BsArrowLeft size={24} color='#000'/>
+    );
+}
+
+export function IconVoltarWhite() {
+    const { theme } = useAuth();
+    return (
+        <BsArrowLeft size={24} color='#fff'/>
     );
 }
 

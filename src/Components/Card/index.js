@@ -14,11 +14,11 @@ const Card = ({ pedido, onClick }) => {
 
     return (
         <div className="card-pedidoadm" onClick={onClick}>
-           
+
             <div className='cont-cardpedidos'>
                 {pedido.quantidade} {pedido.nome_produto}
             </div>
-             <h4>Mesa {pedido.mesa}</h4>
+            <h4>Mesa {pedido.mesa}</h4>
             <p>Comanda: {pedido.comanda}</p>
 
         </div>

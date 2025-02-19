@@ -20,8 +20,6 @@
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 0px;
     border-top-right-radius: 0px;
-    box-shadow: 3px 0px 6px rgba(155, 155, 155, 0.356); /* Sombra maior na direita */
-    transition: box-shadow 0.3s ease-in-out; /* Suaviza a sombra ao passar o mouse */
     object-fit: cover;
     border: #10b98100;
 }
@@ -91,7 +89,6 @@
     width: 100%;
     height: 100%;
     overflow-y: auto;  /* Habilita rolagem horizontal */
-    overflow-x: hidden;
     white-space: nowrap;  /* Impede quebra de linha */
     gap: 10px;  /* Espaçamento entre os cards */
     padding-top: 6px;
@@ -238,16 +235,17 @@
     display: flex;  /* Alinha os itens horizontalmente */
     flex-direction: column;
     width: 100%;
-    height: 100%;
-    overflow-y: auto;  /* Habilita rolagem horizontal */
-    overflow-x: hidden;
+    height: 100vh;
+    overflow-y: auto; /* Habilita rolagem apenas na vertical */
+    scrollbar-width: none;
     white-space: nowrap;  /* Impede quebra de linha */
     gap: 10px;  /* Espaçamento entre os cards */
     padding-top: 6px;
     padding-bottom: 6px;
     padding-left: 12px;
     padding-right: 12px;
-    scrollbar-width: none;  /* Define a largura da barra de rolagem */
+    scrollbar-color: rgba(0, 0, 0, 0);;
+    
 }
 
 

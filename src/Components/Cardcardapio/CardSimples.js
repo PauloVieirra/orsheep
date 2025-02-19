@@ -5,9 +5,9 @@ import { BotaoPedir, BotaoPedirIcon } from "../Botoes";
 import { FaStar } from "react-icons/fa6";
 import './style.css';
 
-export function Card({ produto  }) {
-    
-    const {theme} = useAuth();
+export function Card({ produto }) {
+
+    const { theme } = useAuth();
     const navigate = useNavigate();
 
     const handleDetalhes = () => {
@@ -15,38 +15,38 @@ export function Card({ produto  }) {
     };
 
     return (
-        <div className="card-simples" onClick={handleDetalhes} style={{background:theme.backgroundCard, boxShadow:theme.sombraCardSimple}}>
+        <div className="card-simples" onClick={handleDetalhes} style={{ background: theme.backgroundCard, boxShadow: theme.sombraCardSimple }}>
 
             <img src={produto?.imagem_url} style={{ margin: '0px' }} />
 
             <section className="cont-card">
-                <section className="text-card-titulos" style={{color:theme.textGeral}}>
-                    {produto?.nome} <div><FaStar className="icon-start"/> 4.5</div>
+                <section className="text-card-titulos" style={{ color: theme.textGeral }}>
+                    {produto?.nome} <div><FaStar className="icon-start" /> 4.5</div>
                 </section>
-                <section className="dados" style={{color:theme.textGeral}}>
+                <section className="dados" style={{ color: theme.textGeral }}>
                     {produto?.curta_descricao}
                 </section>
             </section>
 
-            <div className="cont-price-pedir"> 
+            <div className="cont-price-pedir">
 
-            <section className="card-price" style={{color:theme.textGeral}}>
-               {produto?.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-               <BotaoPedirIcon/>  
-            </section>
+                <section className="card-price" style={{ color: theme.textGeral }}>
+                    {produto?.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                    <BotaoPedirIcon />
+                </section>
 
-           
 
-           </div>
+
+            </div>
         </div>
     );
 }
 
 
-export function CardSimples({ produtos = [], limite = 5  }) {
+export function CardSimples({ produtos = [], limite = 5 }) {
     return (
         <div className="scroll-container">
-           {produtos.slice(0, limite).map((produto) => (
+            {produtos.slice(0, limite).map((produto) => (
                 <Card key={produto.id} produto={produto} />
             ))}
         </div>

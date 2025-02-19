@@ -13,7 +13,7 @@ function AppRoutes  () {
   const {user} = useAuth();
   
   return (
-    <div style={{display:'flex', flexDirection:'row', backgroundColor:'#131313'}}>
+    <div style={{display:'flex', flexDirection:'column', backgroundColor:'#131313'}}>
      
     
       <Routes>
@@ -23,7 +23,7 @@ function AppRoutes  () {
         <Route path="/Pesquisar" element={<Pesquisar/>}/>
         <Route path="/Conta" element={<Conta/>}/>
       </Routes> 
- 
+   
     </div>
   );
 };

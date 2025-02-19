@@ -1,6 +1,7 @@
 .pesquisar-container {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 100%;
     height: 100vh;
     background-color: #fff;

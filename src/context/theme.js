@@ -7,6 +7,8 @@ export const LightTheme = {
     inputBackground: '#FFFFFF',
     btnPriceBannerBackground: 'rgba(57, 65, 90, 0)',
     buttonPedir: 'rgba(57, 65, 90, 0.93)',
+    iconsColors:'rgba(255, 255, 255, 0.93)',
+    footerBackground:'rgb(36, 42, 59)',
     /*Textos*/
     textGeral: 'rgb(37, 37, 37)',
     textLeitura: 'rgb(56, 56, 56)',
@@ -28,6 +30,8 @@ export const LightTheme = {
     inputBackground: 'rgba(6, 7, 18, 0.46)',
     btnPriceBannerBackground: 'rgba(57, 65, 90, 0.93)',
     buttonPedir: 'rgba(224, 144, 38, 0.93)',
+    iconsColors:'rgba(221, 221, 221, 0.85)',
+    footerBackground:'rgba(43, 48, 61, 0.32)',
     /*Textos*/
     textGeral: 'rgba(243, 243, 243, 0.93)',
     textLeitura: 'rgba(243, 243, 243, 0.76)',

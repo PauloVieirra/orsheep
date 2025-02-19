@@ -6,7 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import "./style.css";
 
 export default function ItemDetalhes() {
-    const { setSelectedProduct, setQuantidade, quantidade, confirmarPedido } = useAuth();
+    const { setSelectedProduct, setQuantidade, quantidade, confirmarPedido, theme } = useAuth();
     const location = useLocation();
     const { produto } = location.state || {};
 
@@ -27,7 +27,7 @@ export default function ItemDetalhes() {
     };
 
     return (
-        <div className="container-detalhes">
+        <div className="container-detalhes" style={{background:theme.background}}>
             <Menuvoltar />
             <div className="cont-imagedetalhe">
 
@@ -50,12 +50,12 @@ export default function ItemDetalhes() {
             </div>
 
             <div className="cont-detalhesproduto">
-                <section className="description">{produto.longa_descricao}</section>
+                <section className="description" style={{color:theme.textLeitura}}>{produto.longa_descricao}</section>
 
                 <section className="bottoms-detalhes">
                     <div className="cont-btns-count">
-                    <div className="cont-valortotal"> 
-                        <span><strong>R$ {(produto.preco * quantidade).toFixed(2)}</strong></span>
+                    <div className="cont-valortotal" style={{background:theme.backgroundCard}}> 
+                        <span style={{color:theme.textGeral}}><strong>R$ {(produto.preco * quantidade).toFixed(2)}</strong></span>
                     </div>
                         <div className="cont-btnconunt">
                             <button 
@@ -64,7 +64,7 @@ export default function ItemDetalhes() {
                             >
                                 -
                             </button>
-                            <span>{quantidade}</span>
+                            <span style={{color:theme.textGeral}}>{quantidade}</span>
                             <button 
                                 className="btnsomar" 
                                 onClick={() => setQuantidade((q) => q + 1)}

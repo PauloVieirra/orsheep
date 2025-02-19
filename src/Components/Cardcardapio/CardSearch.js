@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { FaStar } from "react-icons/fa6";
+import { BotaoPedirIcon } from "../Botoes";
 import './style.css';
 
 export function Card({ produto }) {
@@ -19,25 +20,23 @@ export function Card({ produto }) {
 
             <img src={produto?.imagem_url} style={{ margin: '0px' }} />
 
-            <section className="cont-card">
+            <section className="cont-card" style={{background:theme.backgroundCard}}>
 
-                <section className="text-card-titulos">
+                <section className="text-card-titulos" style={{color:theme.textGeral}}>
                     {produto?.nome} <div><FaStar className="icon-start"/> 4.5</div>
                 </section>
-                <section className="dados">
+                <section className="dados" style={{color:theme.textLeitura}}>
                     {produto?.curta_descricao}
                 </section>
                 
 
                 <div className="cont-price-pedir"> 
-            <section className="card-price">
+            <section className="card-price" style={{color:theme.textGeral}}>
                 {produto?.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
 
             </section>
 
-            <button className="card-pedir">
-                <> Pedir </>
-            </button>
+            <BotaoPedirIcon/>
             </div>
 
 

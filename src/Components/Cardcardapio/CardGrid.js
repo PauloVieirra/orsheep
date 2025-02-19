@@ -26,6 +26,7 @@ export function Card({ produto }) {
                     src={produto?.imagem_url}
                     className={`cards-img ${imageLoaded ? "show" : "hide"}`}
                     onLoad={() => setImageLoaded(true)}
+                    style={{ margin: '0px' }}
                     alt={produto?.nome}
                 />
                 <div className="img-titulogrid">
@@ -33,10 +34,10 @@ export function Card({ produto }) {
                 </div>
             </div>
             <section>
-                <div className="cont-pricegrid">
+                <div className="cont-pricegrid" style={{color:theme.textGeral}}>
                     {produto?.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                 </div>
-                <div className="dados-grid">
+                <div className="dados-grid" style={{color:theme.textLeitura}}>
                     {produto?.curta_descricao}
                 </div>
                 <div className="cont-gridbtn">

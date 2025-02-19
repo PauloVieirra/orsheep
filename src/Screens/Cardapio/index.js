@@ -7,6 +7,7 @@ import { CardGrid } from "../../Components/Cardcardapio/CardGrid";
 import { Menutop } from "../../Components/Menutop";
 import { MenuSide } from "../Menulateral";
 import { Banner } from "../../Components/Cardcardapio/CardBanner";
+import { Footer } from "../../Components/Footer";
 import { IconBebiAl, IconEntrad, IconPrato, IconLanche, IconHappy, IconTudo } from "../../Components/Icons";
 
 import "./style.css";
@@ -183,7 +184,7 @@ export default function Cardapio() {
             {/* Menu Lateral */}
             {isMenuOpen && <MenuSide />}
 
-           
+           <Footer/>
 
         </div>
     );

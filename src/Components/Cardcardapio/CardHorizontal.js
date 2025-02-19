@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { BotaoPedir } from "../Botoes";
+import { BotaoPedirIcon } from "../Botoes";
 import { FaStar } from "react-icons/fa6";
 import './style.css';
 
@@ -28,6 +28,7 @@ export function Card({ produto }) {
           src={produto?.imagem_url}
           className={`cards-img ${imageLoaded ? "show" : "hide"}`}
           onLoad={() => setImageLoaded(true)}
+          style={{ margin: '0px' }}
           alt={produto?.nome}
         />
       </div>
@@ -41,7 +42,7 @@ export function Card({ produto }) {
         </section>
         <section className="card-price" style={{color:theme.textGeral}}>
           {produto?.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-          <BotaoPedir />
+          <BotaoPedirIcon />
         </section>
 
       </section>

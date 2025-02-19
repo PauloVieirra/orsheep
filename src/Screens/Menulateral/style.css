@@ -79,57 +79,11 @@ nav ul li a {
     padding: 12px;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20px;
 }
 
 
 
-/* Estilo do botão de troca de tema */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
-}
 
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 20px;
-    transition: .4s;
-    background-color: #4d4d4d;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 14px;
-    width: 14px;
-    left: 3px;
-    bottom: 3px;
-    border-radius: 50%;
-    transition: .4s;
-    background-color: #f3f3f3;
-}
-
-input:checked + .slider {
-    background-color: #ffffff;
-}
-
-input:checked + .slider:before {
-    background-color: #585858;
-    transform: translateX(20px);
-}
 
 /* Rodapé do menu */
 .menu-footer {

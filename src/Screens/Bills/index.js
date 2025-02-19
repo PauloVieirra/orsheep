@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import { VoltarFixo } from "../../Components/Menutop";
 import supabase from "../../servers/SupabaseConect";
 import { IconClose } from "../../Components/Icons";
+import { Footer } from "../../Components/Footer";
 import "./style.css";
 
 export function Conta() {
@@ -72,7 +73,9 @@ console.log("Serviço (%):", configuracao?.servico);
             {error && <p className="error">{error}</p>}
 
             {!loading && !error && pedidos.length === 0 ? (
+               <div className="cont-bills">
                 <p>Você ainda não fez nenhum pedido.</p>
+               </div>
             ) : (
                 <div className="cont-bills">
                     <ul>
@@ -121,6 +124,7 @@ console.log("Serviço (%):", configuracao?.servico);
                 </div>
             </div>
             }
+            <Footer/>
         </div>
     );
 }

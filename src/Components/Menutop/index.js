@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { IconVoltar } from "../Icons";
@@ -9,71 +9,71 @@ import { MenuSide } from "../../Screens/Menulateral";
 import './style.css';
 
 
-export function Menutop () {
-    const { cliente, handleMenu,theme } = useAuth();
+export function Menutop() {
+    const { cliente, handleMenu, theme, themeName, toggleTheme, isMenuOpen } = useAuth();
     const navigate = useNavigate();
 
-    
 
-    const handleOpenMenu =() =>{
+    const handleOpenMenu = () => {
         handleMenu();
     }
-    
-  
-    return(
+
+    return (
         <>
-            <div className="containertop" style={{background:theme.background}}> 
-                
-                <h4 style={{color:theme.textGeral}}>Mesa {cliente?.mesa}</h4> 
-                <h4 style={{color:theme.textGeral}}>Comanda {cliente?.comanda}</h4> 
+            <div className="containertop" style={{ background: theme.background }}>
 
-                <div>
-                <button onClick={() => navigate('/Conta')} className="btn-voltar">
-                    <IconBills/>
-                </button>
-                
-                <button className="btn-voltar" onClick={handleOpenMenu}>
-                    <IconMenu/>
-                </button>
+                <h4 style={{ color: theme.textGeral }}>Mesa {cliente?.mesa}</h4>
+                <h4 style={{ color: theme.textGeral }}>Comanda {cliente?.comanda}</h4>
+
+                <div className="cont-bills-switch">
+                    <button onClick={() => navigate('/Conta')} className="btn-voltar">
+                        <IconBills />
+                    </button>
+
+                    <div className="theme-switcher">
+                        <span style={{ color: theme.textGeral }}></span>
+                        <label className="switch" style={{ backgroundColor: theme.liderColor }}>
+                            <input type="checkbox" checked={themeName === "dark"} onChange={toggleTheme} />
+                            <span className="slider" ></span>
+                        </label>
+                    </div>
+
                 </div>
-
-                
-
 
             </div>
 
-           
+
         </>
     );
 };
 
-export function Menuvoltar () {
+export function Menuvoltar() {
     const { produtos, handleProdutos, cliente, user, logout, toggleBillsModal } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
 
-    return(
+    return (
         <div className="containervoltar">
-           <button onClick={() => navigate(-1)} className="btn-voltar">
-            <IconVoltar/> 
-           </button>
+            <button onClick={() => navigate(-1)} className="btn-voltar">
+                <IconVoltar />
+            </button>
             Voltar
         </div>
     );
 }
 
-export function VoltarFixo () {
+export function VoltarFixo() {
     const { theme } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
 
-    return(
+    return (
         <div className="cont-voltar-fixo">
-            <section className="back" style={{color:theme.textGeral}}> 
-           <button onClick={() => navigate(-1)} className="btn-voltar">
-            <IconVoltarBlack/> 
-           </button>
-            Voltar
+            <section className="back" style={{ color: theme.textGeral }}>
+                <button onClick={() => navigate(-1)} className="btn-voltar">
+                    <IconVoltarBlack />
+                </button>
+                Voltar
             </section>
         </div>
     );

@@ -102,6 +102,7 @@ export default function ItemDetalhes() {
                     }
 
                    {configuracao?.status_delivery && !cliente && 
+                   
                     <div onClick={hanldeAddToCart}> 
                     <BotaoAddToCart alt="Pedir" className="btnpedir"/>
                     </div>

@@ -30,19 +30,35 @@ export function Menutop() {
 
 
                     {!cliente ? configuracao.status_delivery === true && (
-                        <>
+                        <div style={{display:'flex', height:'100%', justifyContent:'center', alignItems:'center'}}>
                             <button onClick={() => navigate('./Cart')}  className="btn-voltar">
-                                <IconCart />
-                            </button>
-                        </>
+                                <IconCart /> 
+                              
+                            </button> 
+
+                            <span style={{color:theme.textGeral, fontSize:'20px'}}> Delivery </span>
+                        </div>
                     ) : (
                         <>
                         </>
                     )}
 
+                        {configuracao.status_mesa === false && configuracao.status_delivery === false &&
+
+                        <>
+                        <span style={{color:theme.textGeral, fontSize:'20px'}}> Cardápio  </span>
+                        </>
+
+                        }
+
+                    </div>
 
 
-                </div>
+                
+
+
+
+
 
                 <div className="cont-bills-switch">
 

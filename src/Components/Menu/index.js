@@ -3,6 +3,7 @@ import { BotaoMenu } from "../Botoes";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { FaHome, FaBox, FaTag, FaCog } from "react-icons/fa"; // Exemplo de ícones
+import { IconMenuVClose, IconMenuVOpen } from "../Icons";
 import './styles.css';
 
 export default function Menus() {
@@ -12,8 +13,8 @@ export default function Menus() {
     return (
         <div className={isMenuOpen ? "containeropen" : "containerclose"}>
             <div>
-                <button onClick={handleMenu}>
-                    {isMenuOpen ? "Fechar" : "Abrir"}
+                <button onClick={handleMenu} style={{backgroundColor:'#fff'}}>
+                   {isMenuOpen ?  <IconMenuVClose/> : <IconMenuVOpen/>}
                 </button>
             </div>
             {isMenuOpen ? (

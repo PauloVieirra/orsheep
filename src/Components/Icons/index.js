@@ -5,13 +5,10 @@ import { RiFilePaper2Line } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import { FiMenu } from "react-icons/fi";
 import { PiCallBellBold } from "react-icons/pi";
-import { FaWindowClose } from "react-icons/fa";
-import { IoSunnySharp } from "react-icons/io5";
-import { IoMoonOutline } from "react-icons/io5";
-import { FaLinkedin } from "react-icons/fa";
+import { FaWindowClose, FaLinkedin, FaFigma, FaWhatsappSquare } from "react-icons/fa";
+import { IoSunnySharp, IoMoonOutline } from "react-icons/io5";
 import { SiNotion } from "react-icons/si";
-import { FaFigma } from "react-icons/fa";
-import { FaWhatsappSquare } from "react-icons/fa";
+import { TfiClose, TfiMenu } from "react-icons/tfi";
 import './style.css';
 
 export function IconWhats() {
@@ -64,8 +61,9 @@ export function IconVoltarWhite() {
 }
 
 export function IconCart() {
+    const {theme} = useAuth();
     return (
-        <BsBasket2 />
+        <BsBasket2 size={24} color={theme.textGeral}/>
     );
 }
 
@@ -155,6 +153,22 @@ export function IconPedir() {
 export function IconClose() {
     return (
         <FaWindowClose className="icon-close" />
+    );
+}
+
+
+export function IconMenuVOpen() {
+    const {theme} = useAuth();
+    return (
+        <TfiMenu size={24} color={theme.iconsColors} />
+    );
+}
+
+
+export function IconMenuVClose() {
+    const {theme} = useAuth();
+    return (
+        <TfiClose size={24} color={theme.iconsColors} />
     );
 }
 

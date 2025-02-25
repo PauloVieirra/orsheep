@@ -2,11 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { FaStar } from "react-icons/fa6";
-import { BotaoPedirIcon } from "../Botoes";
+import { BotaoPedirIcon, BotaoAddToCart } from "../Botoes";
 import './style.css';
 
 export function Card({ produto }) {
-    const { theme } = useAuth();
+    const { theme, cliente, configuracao } = useAuth();
     const navigate = useNavigate();
 
     const handleDetalhes = () => {
@@ -34,9 +34,21 @@ export function Card({ produto }) {
                     <section className="card-price" style={{ color: theme.textGeral }}>
                         {produto?.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
 
+
+
                     </section>
 
-                    <BotaoPedirIcon />
+                    {cliente?.mesa && cliente?.comanda && configuracao.status_mesa &&
+                        <BotaoPedirIcon />
+                    }
+
+
+                    {configuracao?.status_delivery && !cliente?.mesa && !cliente?.comanda &&
+                        <div>
+                            <BotaoAddToCart alt="Pedir" className="btnpedir" />
+                        </div>
+                    }
+
                 </div>
 
 

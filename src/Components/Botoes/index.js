@@ -43,6 +43,17 @@ export function BotaoPedirIcon() {
     );
 }
 
+export function BotaoAddToCart() {
+    const { theme, produto, adicionarAoCarrinho } = useAuth();
+
+
+    return (
+        <button className="btn-pedir" style={{ background: theme.buttonPedir }}>
+           <>+ Adicionar</>
+        </button>
+    );
+}
+
 export function BotaoMenuSide({ text, link }) {
     const { theme } = useAuth();
     return (

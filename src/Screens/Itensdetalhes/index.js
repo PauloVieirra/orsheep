@@ -2,31 +2,44 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { MenuVoltarF } from "../../Components/Menutop";
 import { FaStar, FaRegStarHalfStroke, FaRegStar } from "react-icons/fa6";
-import { BotaoPedirIcon } from "../../Components/Botoes";
+import { BotaoPedirIcon, BotaoAddToCart } from "../../Components/Botoes";
 import { useAuth } from "../../context/AuthContext";
 import "./style.css";
 
 export default function ItemDetalhes() {
-    const { setSelectedProduct, setQuantidade, quantidade, confirmarPedido, theme, statusPedido } = useAuth();
+    const { setSelectedProduct, setQuantidade, quantidade, confirmarPedido, theme, statusPedido, cliente, configuracao, adicionarAoCarrinho  } = useAuth();
+
     const location = useLocation();
     const { produto } = location.state || {};
-
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    
+    const [isModalCartOpen, setIsModalCartOpen] = useState(false);
 
     if (!produto) {
         return <p>Produto não encontrado.</p>;
     }
+
+   
+    const hanldeAddToCart = () => {
+        setSelectedProduct(produto);
+        setIsModalCartOpen(true); // Abre o modal
+    }
+
 
     const handlePedirClick = () => {
         setSelectedProduct(produto);
         setIsModalOpen(true); // Abre o modal
     };
 
+
+
     const handleConfirmarPedido = () => {
         confirmarPedido();
         setIsModalOpen(false); // Fecha o modal após confirmar
+    };
+
+    const handleConfirmarAdd = () => {
+        adicionarAoCarrinho();
+        setIsModalCartOpen(false); // Fecha o modal após confirmar
     };
 
     return (
@@ -79,11 +92,21 @@ export default function ItemDetalhes() {
                         </div>
 
                     </div>
+                    
+                    {cliente?.mesa && cliente?.comanda && configuracao.status_mesa && 
                     <div onClick={handlePedirClick}> 
                     <BotaoPedirIcon alt="Pedir" className="btnpedir" >
                         Pedir
                     </BotaoPedirIcon>
                     </div>
+                    }
+
+                   {configuracao?.status_delivery && !cliente && 
+                    <div onClick={hanldeAddToCart}> 
+                    <BotaoAddToCart alt="Pedir" className="btnpedir"/>
+                    </div>
+                    }
+
 
                 </section>
             </div>
@@ -110,6 +133,26 @@ export default function ItemDetalhes() {
                     </div>
                 </div>
             )}
+
+{isModalCartOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>Confirmar Pedido</h2>
+                        <p>
+                            Você está pedindo <strong>{quantidade}</strong>x <strong>{produto.nome}</strong>.
+                        </p>
+                        <p>
+                            Valor total: <strong>R$ {(produto.preco * quantidade).toFixed(2)}</strong>
+                        </p>
+
+                        <div className="modal-buttons">
+                            <button className="btncancelar" onClick={() => setIsModalCartOpen(false)}>Cancelar</button>
+                            <button className="btnconfirmar" onClick={handleConfirmarAdd}>Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
 
 
 

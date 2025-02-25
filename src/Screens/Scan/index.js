@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import localforage from "localforage";
+import Cardapio from "../Cardapio";
 import './style.css';
 
 const Scan = () => {
@@ -78,19 +79,10 @@ const Scan = () => {
         </>
        ):(
         <>
-        <div className="container-thanks">
-          
-          <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Beaming%20Face%20with%20Smiling%20Eyes.png" alt="Beaming Face with Smiling Eyes"/>
-        
-        <h3>Obrigado, volte sempre!!!</h3>
-        <div className="container-despedida">
-          Agradecemos imensamente por usar nosso serviço. Lembre-se, é sempre um prazer tê-lo por aqui.
-        </div>
-        </div>
+        <Cardapio/>
         </>
        )}
      
-
     </div>
   );
 };

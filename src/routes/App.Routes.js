@@ -5,6 +5,7 @@ import Cardapio from '../Screens/Cardapio';
 import ItemDetalhes from '../Screens/Itensdetalhes';
 import { Conta } from '../Screens/Bills';
 import { Pesquisar } from '../Screens/Pesquisar';
+import Scan from '../Screens/Scan';
 import ItemBannerDetalhes from '../Screens/IntensBannerDetalhes';
 
 

@@ -50,7 +50,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100px;
+    height: 100%;
     height: 100%;
     font-size: 18px;
     font-weight: 700;
@@ -147,6 +147,8 @@
     font-weight: 400;
     color: #6b7280; 
 }
+
+
 .card-simples section.card-price{
     display: flex;
     align-items: center;
@@ -157,6 +159,17 @@
     color: #323333; 
     border-radius: 6px;
 }
+
+.cont-price-pedir{
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: flex-end;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
 
 .scroll-container {
     display: flex;  /* Alinha os itens horizontalmente */
@@ -218,14 +231,8 @@
     font-weight: 400;
     
 }
-.cont-price-pedir{
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 12px;
-    padding-right: 12px;
-}
+
+
 /*Scroll do card horizontal*/
 .scroll-search {
     display: flex;  /* Alinha os itens horizontalmente */
@@ -265,7 +272,7 @@
     gap: 4px;
     overflow-x: auto;
     scroll-behavior: smooth;
-    width:auto;
+    width:100%;
     height: auto;
     cursor: grab;
     scrollbar-width: none;
@@ -280,20 +287,20 @@
     flex: 0 0 100%; /* Agora cada item ocupa 80% do container, mostrando parte do próximo */
     transition: transform 0.3s ease-in-out;
     scroll-snap-align: center;
+    max-height: 400px;
     border-width: 0cm;
     position: relative;
     justify-content: center;
-    border-color: #10b981;
 }
 
 .card-banner .newbbaner{
     border-radius: 12px;
-    border-color: #10b981;
 
 }
 
 .card-banner img {
     width: 100%;
+    max-height: 400px;
     height: auto;
     object-fit: cover;
     border-color: #10b98100;

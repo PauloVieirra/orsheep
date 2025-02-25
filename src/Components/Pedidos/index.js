@@ -168,8 +168,6 @@ export default function Pedidos() {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    {canPlaySound ? <button onClick={handlePlay}>Desativa Som de Notificação</button> : <button onClick={handlePlay}>Ativar Som de Notificação</button> }
-                     
                 </div>
                 
                 <div className="selecteditens" style={{ display: 'flex', gap: '10px' }}>
@@ -282,7 +280,6 @@ export default function Pedidos() {
                         />
                         )}
 
-            
                 {modalOpen && 
                     <ModalConfirme
                         isOpen={modalOpen}

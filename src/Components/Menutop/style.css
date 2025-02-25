@@ -99,9 +99,10 @@
 
 .cont-bills-switch{
     display: flex;
-    width: auto;
+    width: 50%;
     height: auto;
     justify-content: flex-end;
+    align-items: flex-end;
 }
 
 /* Estilo do botão de troca de tema */
@@ -151,6 +152,10 @@ input:checked + .slider:before {
     transform: translateX(20px);
 }
 
+.cont-switch{
+    display: flex;
+    width: 'auto';
+}
 
 
 

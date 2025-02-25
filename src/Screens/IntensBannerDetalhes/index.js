@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { FaStar, FaRegStarHalfStroke, FaRegStar } from "react-icons/fa6";
 import { MenuVoltarF } from "../../Components/Menutop";
+import { BotaoAddToCart, BotaoPedirIcon } from "../../Components/Botoes";
 import { useAuth } from "../../context/AuthContext";
 import "./style.css";
 
 export default function ItemBannerDetalhes() {
-    const { setSelectedProduct, setQuantidade, quantidade, confirmarPedido, theme, statusPedido } = useAuth();
+    const { setSelectedProduct, setQuantidade, quantidade, confirmarPedido, theme, statusPedido, cliente, configuracao } = useAuth();
     const location = useLocation();
     const { produto } = location.state || {};
 
@@ -27,26 +28,26 @@ export default function ItemBannerDetalhes() {
     };
 
     return (
-        <div className="container-detalhes-Banner" style={{background:theme.background}}>
-           <MenuVoltarF/>
-            
+        <div className="container-detalhes-Banner" style={{ background: theme.background }}>
+            <MenuVoltarF />
+
             <div className="bannercont-imagedetalhe">
 
                 <img src={produto.imagem_url} alt={produto.nome} style={{ margin: "0px" }} />
 
                 <div className="cont-dados-img">
-                    
+
                     <span>{produto.nome}</span>
-                   
+
                 </div>
             </div>
 
             <div className="container-detalhes">
-               <div className="banner-price" style={{color:theme.textGeral}}> 
+                <div className="banner-price" style={{ color: theme.textGeral }}>
 
-                R$ {produto.preco.toFixed(2)}
+                    R$ {produto.preco.toFixed(2)}
 
-                <div style={{ display: "flex", paddingTop: "8px", justifyContent: "space-between" }}>
+                    <div style={{ display: "flex", paddingTop: "8px", justifyContent: "space-between" }}>
                         <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
                             <FaStar className="icon-start" />
                             <FaStar className="icon-start" />
@@ -55,10 +56,10 @@ export default function ItemBannerDetalhes() {
                             <FaRegStar className="icon-start" />
                             <div style={{ fontSize: "18px", marginLeft: "8px" }}>{produto.avaliacao}</div>
                         </div>
-                </div>
+                    </div>
                 </div>
 
-                <div className="description" style={{color:theme.textGeral}}>
+                <div className="description" style={{ color: theme.textGeral }}>
                     {produto.longa_descricao}
                 </div>
 
@@ -67,36 +68,47 @@ export default function ItemBannerDetalhes() {
 
                     <div className="cont-btnscount">
 
-                       <div className="cont-valortotal"> 
-                        <span><strong>R$ {(produto.preco * quantidade).toFixed(2)}</strong></span>
-                       </div>
-                       
-                       <div className="cont-btnsomar">
-                            <button 
-                                className="btnsomar" 
+                        <div className="cont-valortotal">
+                            <span><strong>R$ {(produto.preco * quantidade).toFixed(2)}</strong></span>
+                        </div>
+
+                        <div className="cont-btnsomar">
+                            <button
+                                className="btnsomar"
                                 onClick={() => setQuantidade((q) => Math.max(1, q - 1))}
                             >
                                 -
                             </button>
-                            <div className="cont-bannerquantidade" style={{color:theme.textGeral}}>{quantidade}</div>
-                            <button 
-                                className="btnsomar" 
+                            <div className="cont-bannerquantidade" style={{ color: theme.textGeral }}>{quantidade}</div>
+                            <button
+                                className="btnsomar"
                                 onClick={() => setQuantidade((q) => q + 1)}
                             >
                                 +
                             </button>
                         </div>
-                       
+
                     </div>
 
-                    <div className="cont-btnpedir"> 
-                    <button alt="Pedir" className="btnpedir" onClick={handlePedirClick}>
-                        Pedir
-                    </button>
+                    <div className="cont-btnpedir">
+
+                        {cliente?.mesa && cliente?.comanda && configuracao.status_mesa &&
+                            <div onClick={handlePedirClick}>
+                                <BotaoPedirIcon alt="Pedir" className="btnpedir" style={{with:'100%'}} >
+                                    Pedir
+                                </BotaoPedirIcon>
+                            </div>
+                        }
+
+                        {configuracao?.status_delivery && !cliente?.mesa && !cliente?.comanda &&
+                            <div>
+                                <BotaoAddToCart alt="Pedir" className="btnpedir" />
+                            </div>
+                        }
                     </div>
 
                 </section>
-                    
+
             </div>
 
             {/* MODAL DE CONFIRMAÇÃO */}
@@ -125,7 +137,7 @@ export default function ItemBannerDetalhes() {
             {statusPedido && (
                 <div className="modal-enviado">
                     <div className="pedido-enviado">
-                      <span>  Pedido enviado com sucesso!  </span>
+                        <span>  Pedido enviado com sucesso!  </span>
                     </div>
                 </div>
             )}

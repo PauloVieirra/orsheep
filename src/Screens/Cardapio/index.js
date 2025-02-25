@@ -107,6 +107,8 @@ export default function Cardapio() {
             </div>
         </div>
 
+           
+           
             {/* Renderização Condicional */}
             {filtroCategoria ? (
                 <div className="categoria-container">

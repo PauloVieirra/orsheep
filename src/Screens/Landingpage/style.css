@@ -1,0 +1,335 @@
+/* Layout Principal */
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1600px;
+    align-self: center;
+    text-align: center;
+    background-color: #fdfdfd;
+}
+
+/* Seção Hero */
+.hero {
+    display: flex;
+    position: relative;
+    max-width: 1441px;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #2f3e5f, #f0f7ff);
+    color: white;
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 360px;
+    width: 100%;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.textTituliocentral {
+    width: 100%;
+    text-wrap: initial;
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+
+.contslide {
+    width: 100%;
+    height: 100%;
+}
+
+.scroll-content {
+    display: flex;
+    width: 600px;
+    transition: transform 0.5s ease-in-out;
+    white-space: nowrap;
+}
+
+.hero-image {
+    width: '100%';
+    height: '100%';
+    max-width: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    /* Evita encolhimento */
+    border: none;
+    margin-top: 60px;
+}
+
+
+
+
+/* Efeito de transição */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+.cta-btn {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cta-btn:hover {
+    background-color: #222;
+}
+
+/* Seção de Estatísticas */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px;
+}
+
+.stat-item h2 {
+    font-size: 36px;
+    color: #2d314b;
+}
+
+.stat-item p {
+    font-size: 16px;
+}
+
+/* Apresentacao */
+.apresentacao {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 400px;
+}
+
+.apresentacao .apres {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+
+}
+
+.apres .itemapres {
+    background-color: #22222246;
+}
+
+/* Testemunhos */
+.testimonials {
+    background-color: white;
+    padding: 50px;
+}
+
+.testimonial {
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+/* Galeria de Imagens */
+.features {
+    padding: 50px;
+    background: #fff;
+}
+
+.image-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.image-gallery img {
+    max-width: 200px;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* Formulário de Contato */
+.contact {
+    background: #f1f1f1;
+    color: white;
+    padding: 50px;
+}
+
+.contact h2 {
+    color: #f1f1f1;
+}
+
+.contact input,
+.contact textarea {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.contact button {
+    background: white;
+    color: #3c485f;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact button:hover {
+    background: #feb47b;
+}
+
+/* Login e Cadastro */
+.auth {
+    display: flex;
+    width: 100%;
+    max-width: 1440px;
+    justify-content: space-between;
+    background-color: #fafafa;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.auth button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.login-btn {
+    background: #333;
+    color: white;
+}
+
+.login-btn:hover {
+    background: #333;
+    color: white;
+}
+
+.register-btn {
+
+    background: #222222;
+    color: white;
+}
+
+.register-btn:hover {
+    background: #ff7e5f;
+    color: white;
+}
+
+/* Rodapé */
+footer {
+    padding: 20px;
+    background: #222;
+    color: white;
+}
+
+.logoimg {
+    width: 36px;
+    border: none;
+}
+
+/* Animação Fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Para telas menores que 600px */
+@media (max-width: 600px) {
+
+    .landing-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+        align-self: center;
+        text-align: center;
+        background-color: #fdfdfd;
+    }
+
+    .auth {
+        width: 100%;
+    }
+
+    .hero {
+
+        max-width: 600px;
+    }
+
+    .apresentacao {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        max-width: 600px;
+    }
+
+    .apres {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .stats {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .stat-item {
+        display: flex;
+        width: 200px;
+    }
+
+    .hero-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 360px;
+        width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .textTituliocentral {
+        width: 100%;
+        text-wrap: initial;
+        font-weight: 800;
+        font-size: 25px;
+    }
+
+}

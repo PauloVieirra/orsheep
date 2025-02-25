@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import localforage from 'localforage'; // Importe localforage
+
 import supabase from '../servers/SupabaseConect';
 import { LightTheme, DarkTheme } from './theme';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   const [lastFetchedId, setLastFetchedId] = useState(null);
   const[isMenuOpen, setIsMenuOpen] = useState(false)
   const [billsOpen, setIsBillsOopen] = useState(null);
-  const [cart,setCart] = useState([]);
+  const [cart, setCart] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [statusPedido, setStatusPedido] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -42,40 +43,54 @@ export const AuthProvider = ({ children }) => {
  
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchConfiguracao() {
-        try {
-            setLoading(true);
-            setError(null);
+ // 🔹 Buscar configurações do Supabase ou localforage
+ useEffect(() => {
+  async function fetchConfiguracao() {
+    try {
+      setLoading(true);
+      setError(null);
 
-            // Primeiro, tenta carregar do armazenamento local
-            const cachedConfig = await localforage.getItem("configuracao");
-            if (cachedConfig) {
-                setConfiguracao(cachedConfig);
-            }
+      // Tenta carregar do localforage primeiro
+      const cachedConfig = await localforage.getItem("configuracao");
+      if (cachedConfig) {
+        setConfiguracao(cachedConfig);
+      }
 
-            // Busca no Supabase as configurações
-            const { data, error } = await supabase
-                .from("configuracoes")
-                .select("status, status_mesa, servico, cover, status_cover")
-                .single();
+      // Busca no Supabase
+      const { data, error } = await supabase.from("configuracoes").select("*").single();
 
-            if (error) {
-                throw error;
-            }
+      if (error) {
+        throw error;
+      }
 
-            // Atualiza o estado e salva localmente
-            setConfiguracao(data);
-            await localforage.setItem("configuracao", data);
-        } catch (err) {
-            setError("Erro ao buscar configurações.");
-        } finally {
-            setLoading(false);
-        }
+      // Atualiza o estado e salva localmente
+      setConfiguracao(data);
+      await localforage.setItem("configuracao", data);
+    } catch (err) {
+      setError("Erro ao buscar configurações.");
+    } finally {
+      setLoading(false);
     }
+  }
 
-    fetchConfiguracao();
+  fetchConfiguracao();
 }, []);
+
+// 🔹 Atualizar configuração específica
+const updateConfiguration = async (key, value) => {
+  if (!configuracao) return;
+
+  const newConfig = { ...configuracao, [key]: value };
+  setConfiguracao(newConfig);
+  await localforage.setItem("configuracao", newConfig);
+
+  // Atualizar no Supabase
+  const { error } = await supabase.from("configuracoes").update({ [key]: value }).eq("id", configuracao.id);
+  if (error) {
+    console.error("Erro ao atualizar configuração:", error);
+  }
+};
+
 
     useEffect(() => {
           fetchPedidos(); // Busca os pedidos iniciais
@@ -102,13 +117,9 @@ export const AuthProvider = ({ children }) => {
           };
       }, []);
  
-
  useEffect(() => {
   fetchUser();
 }, []);
-
-
-
 
 const fetchUser = async () => {
   try {
@@ -135,8 +146,6 @@ const fetchUser = async () => {
   }
 };
 
-  
- 
 const saveUserLocally = async (user) => {
   try {
     if (!user) return;
@@ -150,8 +159,6 @@ const saveUserLocally = async (user) => {
     console.error("Erro ao salvar usuário localmente:", err.message);
   }
 };
-
-  
 
 const login = async (email, password) => {
   try {
@@ -210,7 +217,6 @@ const login = async (email, password) => {
   }
 };
 
-
   // Função para obter os dados do usuário atual
   const getUserData = async () => {
     if (!user) {
@@ -252,8 +258,6 @@ const login = async (email, password) => {
     }
   };
 
-  
-  
   const logout = async () => {
     try {
       const { error } = await supabase.auth.signOut();
@@ -270,8 +274,6 @@ const login = async (email, password) => {
       console.error('Erro ao fazer logout:', error.message);
     }
   };
-
- 
 
   // Função para lidar com o estado de loading
   const handleLoading = () => {
@@ -307,7 +309,6 @@ const login = async (email, password) => {
         setLoading(false);
     }
 };
-
 
 const fetchItensPedido = async (pedidoId) => {
   try {
@@ -383,7 +384,6 @@ const fetchProdutos = async () => {
   }
 };
 
-
 const handleProdutos = () => {
   fetchProdutos();
 }
@@ -430,6 +430,41 @@ const confirmarPedido = async () => {
   }
 };
 
+const adicionarAoCarrinho = () => {
+  if (!selectedProduct) return;
+
+  const novoItem = {
+    id: selectedProduct.id,
+    nome_produto: selectedProduct.nome,
+    valor: selectedProduct.preco,
+    quantidade: quantidade,
+    observacao: "",
+  };
+
+  setCart((prevCart) => {
+    const itemExistente = prevCart.find((item) => item.id === novoItem.id);
+
+    if (itemExistente) {
+      return prevCart.map((item) =>
+        item.id === novoItem.id
+          ? { ...item, quantidade: item.quantidade + novoItem.quantidade }
+          : item
+      );
+    } else {
+      return [...prevCart, novoItem];
+    }
+  });
+
+  setQuantidade(1);
+  setIsModalOpen(false);
+  setSelectedProduct(null);
+  setStatusPedido(true);
+
+  setTimeout(() => {
+    setStatusPedido(false);
+  }, 3000);
+};
+
 
 const updatePedidoStatus = async (id, newStatus) => {
   try {
@@ -451,7 +486,6 @@ const updatePedidoStatus = async (id, newStatus) => {
 useEffect(() => {
   fetchPedidos();
 }, []);
-
 
  // Função para definir cliente e salvar no armazenamento local
   const setClienteHandle = async (clienteData) => {
@@ -495,7 +529,6 @@ useEffect(() => {
     }
   };
   
-
   const toggleBillsModal = () => {
     setIsBillsOopen((prev) => !prev);
   }
@@ -504,10 +537,25 @@ useEffect(() => {
     setIsModalOpen((prev) => !prev);
   }
 
-  const changePlaySound = () => {
-    setCanPlaySound((prev) => !prev);
-  }
+      // 🔹 Recuperar o estado salvo ao iniciar o componente
+  useEffect(() => {
+    const loadSoundPreference = async () => {
+      const storedValue = await localforage.getItem("canPlaySound");
+      if (storedValue !== null) {
+        setCanPlaySound(storedValue); // `localforage` já retorna o valor no tipo correto
+      }
+    };
+    loadSoundPreference();
+  }, []);
 
+  // 🔹 Alternar estado e salvar no LocalForage
+  const changePlaySound = async () => {
+    setCanPlaySound((prev) => {
+      const newValue = !prev;
+      localforage.setItem("canPlaySound", newValue); // Salva o novo valor
+      return newValue;
+    });
+  };
 
     // Carregar o tema salvo ao montar o componente
 useEffect(() => {
@@ -556,6 +604,7 @@ const toggleTheme = async () => {
     themeName,
     configuracao,
     statusPedido,
+    updateConfiguration,
     toggleTheme,
     handleDeletePedidosPorComanda,
     setQuantidade,
@@ -564,6 +613,7 @@ const toggleTheme = async () => {
     setSelectedProduct,
     setIsMenuOpen,
     setCart,
+    adicionarAoCarrinho,
     confirmarPedido,
     toggleBillsModal,
     setClienteHandle,

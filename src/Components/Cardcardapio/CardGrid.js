@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { BotaoPedir, BotaoPedirIcon } from "../Botoes";
+import { BotaoAddToCart, BotaoPedirIcon } from "../Botoes";
 import { FaStar } from "react-icons/fa6";
 import './style.css';
 
 export function Card({ produto }) {
-    const { theme } = useAuth();
+    const { theme, cliente, configuracao } = useAuth();
     const navigate = useNavigate();
     const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -41,7 +41,14 @@ export function Card({ produto }) {
                     {produto?.curta_descricao}
                 </div>
                 <div className="cont-gridbtn">
+                {cliente?.mesa && cliente?.comanda && configuracao.status_mesa && 
                     <BotaoPedirIcon />
+                }
+                  {configuracao?.status_delivery && !cliente?.mesa && !cliente?.comanda && 
+                                      <div> 
+                                        <BotaoAddToCart alt="Pedir" className="btnpedir"/>
+                                      </div>
+                }
                 </div>
             </section>
         </div>

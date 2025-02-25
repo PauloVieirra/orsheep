@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Slider } from "infinite-react-carousel";
 import "./style.css";
 
 import imghero1 from '../../assets/images/app.png';
@@ -11,8 +10,6 @@ const images = [imghero1, imghero1, imghero1,imghero1,imghero1,imghero1];
 export default function Casehome() {
 
   const scrollRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(true);
 
   const totalSlides = images.length;
 

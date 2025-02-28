@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { IconVoltarBlack, IconVoltarWhite, IconVoltarFlex, IconCart } from "../Icons";
+import { IconVoltarBlack, IconVoltarWhite, IconVoltarFlex, IconCart, IconSun, IconMoon } from "../Icons";
 import { IconBills } from "../Icons";
 import './style.css';
 
@@ -70,7 +70,8 @@ export function Menutop() {
 
                     }
 
-                    <div className="cont-switch">
+                    <div className="cont-switch"> 
+                         {themeName === "dark" ? <IconMoon/> : <IconSun/>  }  
                         <div className="theme-switcher">
                             <span style={{ color: theme.textGeral }}></span>
                             <label className="switch" style={{ backgroundColor: theme.liderColor }}>

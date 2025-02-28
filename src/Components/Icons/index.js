@@ -9,7 +9,16 @@ import { FaWindowClose, FaLinkedin, FaFigma, FaWhatsappSquare } from "react-icon
 import { IoSunnySharp, IoMoonOutline } from "react-icons/io5";
 import { SiNotion } from "react-icons/si";
 import { TfiClose, TfiMenu } from "react-icons/tfi";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import './style.css';
+
+
+export function IconChecked() {
+    const { theme } = useAuth();
+    return (
+        <IoMdCheckmarkCircleOutline size={100} color="green" />
+    );
+}
 
 export function IconWhats() {
     const { theme } = useAuth();
@@ -174,14 +183,16 @@ export function IconMenuVClose() {
 
 
 export function IconSun() {
+    const {theme} = useAuth();
     return (
-        <IoSunnySharp className="icon-close" />
+        <IoSunnySharp size={24} color={theme.textGeral} />
     );
 }
 
 export function IconMoon() {
+    const {theme} = useAuth();
     return (
-        <IoMoonOutline className="icon-close" />
+        <IoMoonOutline size={24} color={theme.textGeral} />
     );
 }
 

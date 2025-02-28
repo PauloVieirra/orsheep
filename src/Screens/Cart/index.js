@@ -6,6 +6,7 @@ import "./style.css";
 
 export function Cartpage() {
     const { cart, setCart } = useAuth();
+    console.log(cart);
 
     // Atualiza a quantidade de um item no carrinho
     const updateQuantidade = (id, novaQuantidade) => {
@@ -28,6 +29,7 @@ export function Cartpage() {
 
     return (
         <div className="cart-container">
+
             <MenuVoltarB />
             <h2>Meu Carrinho</h2>
 
@@ -37,26 +39,60 @@ export function Cartpage() {
                 </div>
             ) : (
                 <div className="cart-items">
-                    <ul>
+                    <div className="cart-cont">
+                    <ul className="cart-list">
                         {cart.map((item) => (
-                            <li key={item.id} className="cart-item">
-                                <span>{item.nome_produto}</span>
-                                <div className="quantity-controls">
-                                    <button onClick={() => updateQuantidade(item.id, item.quantidade - 1)}>-</button>
-                                    <span>{item.quantidade}</span>
-                                    <button onClick={() => updateQuantidade(item.id, item.quantidade + 1)}>+</button>
+                            <li key={item.id} className="cart-card">
+                                <img
+                                    src={item.imagem}
+                                    alt={item.nome_produto}
+                                    className="cart-image"
+                                />
+                                <div className="cart-details">
+                                    <span className="cart-item-name">{item.nome_produto}</span>
+                                    <div className="quantity-controls">
+                                        <button
+                                            onClick={() => updateQuantidade(item.id, item.quantidade - 1)}
+                                            className="quantity-btn"
+                                        >
+                                            -
+                                        </button>
+                                        <span className="quantity">{item.quantidade}</span>
+                                        <button
+                                            onClick={() => updateQuantidade(item.id, item.quantidade + 1)}
+                                            className="quantity-btn"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                    <span className="cart-price">
+                                        R$ {(item.quantidade * item.valor).toFixed(2)}
+                                    </span>
                                 </div>
-                                <span>R$ {(item.quantidade * item.valor).toFixed(2)}</span>
-                                <button onClick={() => removerItem(item.id)} className="remove-item">X</button>
+                                <button onClick={() => removerItem(item.id)} className="remove-item">
+                                    <IconClose />
+                                </button>
                             </li>
                         ))}
                     </ul>
+                    </div>
+
+                    <div className="cart-total">
+                    <h4>Total: R$ {totalPedidos.toFixed(2)}</h4>
+                    <div className="cont-btnenviar">
+                        <button>
+                            Enviar pedido
+                        </button>
+                    </div>
+                   </div>
+
+                
+
+                  
                 </div>
             )}
 
-            <div className="cart-total">
-                <h3>Total: R$ {totalPedidos.toFixed(2)}</h3>
-            </div>
+          
         </div>
     );
 }

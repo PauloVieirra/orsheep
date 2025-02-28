@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { MenuVoltarF } from "../../Components/Menutop";
 import { FaStar, FaRegStarHalfStroke, FaRegStar } from "react-icons/fa6";
+import { IconChecked } from "../../Components/Icons";
 import { BotaoPedirIcon, BotaoAddToCart } from "../../Components/Botoes";
 import { useAuth } from "../../context/AuthContext";
 import "./style.css";
 
 export default function ItemDetalhes() {
-    const { setSelectedProduct, setQuantidade, quantidade, confirmarPedido, theme, statusPedido, cliente, configuracao, adicionarAoCarrinho  } = useAuth();
+    const { setSelectedProduct, setQuantidade, quantidade, confirmarPedido, theme, statusPedido, handleStatuConfirm,cliente, configuracao, adicionarAoCarrinho  } = useAuth();
 
     const location = useLocation();
     const { produto } = location.state || {};
@@ -138,9 +139,9 @@ export default function ItemDetalhes() {
 {isModalCartOpen && (
                 <div className="modal">
                     <div className="modal-content">
-                        <h2>Confirmar Pedido</h2>
+                        <h2>Adicionar ao carrinho?</h2>
                         <p>
-                            Você está pedindo <strong>{quantidade}</strong>x <strong>{produto.nome}</strong>.
+                           <strong>{quantidade}</strong>x <strong>{produto.nome}</strong>.
                         </p>
                         <p>
                             Valor total: <strong>R$ {(produto.preco * quantidade).toFixed(2)}</strong>
@@ -160,9 +161,27 @@ export default function ItemDetalhes() {
 
             {statusPedido && (
                 <div className="modal-enviado">
+
                     <div className="pedido-enviado">
-                      <span>  Pedido enviado com sucesso!  </span>
+                
+                        <div className="iconcheckedmodal"><IconChecked/></div>
+
+                    {!cliente && configuracao?.status_delivery ? (
+                       <> 
+                       <span className="contmesaggens">  Item adicionado ao carrinho!  </span>
+
+                       <button onClick={handleStatuConfirm} >Fechar</button>
+                       </>
+                    ):(
+                        <> 
+                       <span  className="contmesaggens">  Pedido enviado com sucesso!  </span>
+                       <button onClick={handleStatuConfirm} >Fechar</button>
+                       </>
+                    )
+                    
+                    }
                     </div>
+
                 </div>
             )}
 

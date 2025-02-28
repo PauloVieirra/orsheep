@@ -419,22 +419,31 @@ const confirmarPedido = async () => {
     // Seta confirmar como true
     setStatusPedido(true);
 
-    // Aguarda 3 segundos antes de fechar o modal e resetar o estado
-    setTimeout(() => {
-      setStatusPedido(false);
-     
-    }, 3000);
-
   } catch (err) {
     console.error("Erro inesperado ao confirmar pedido:", err);
   }
 };
+
+useEffect(() => {
+  // Carregar carrinho salvo ao iniciar
+  localforage.getItem("cart").then((savedCart) => {
+    if (savedCart) {
+      setCart(savedCart);
+    }
+  });
+}, []);
+
+useEffect(() => {
+  // Salvar carrinho no localforage sempre que for atualizado
+  localforage.setItem("cart", cart);
+}, [cart]);
 
 const adicionarAoCarrinho = () => {
   if (!selectedProduct) return;
 
   const novoItem = {
     id: selectedProduct.id,
+    imagem: selectedProduct.imagem_url,
     nome_produto: selectedProduct.nome,
     valor: selectedProduct.preco,
     quantidade: quantidade,
@@ -444,26 +453,30 @@ const adicionarAoCarrinho = () => {
   setCart((prevCart) => {
     const itemExistente = prevCart.find((item) => item.id === novoItem.id);
 
+    let novoCarrinho;
     if (itemExistente) {
-      return prevCart.map((item) =>
+      novoCarrinho = prevCart.map((item) =>
         item.id === novoItem.id
           ? { ...item, quantidade: item.quantidade + novoItem.quantidade }
           : item
       );
     } else {
-      return [...prevCart, novoItem];
+      novoCarrinho = [...prevCart, novoItem];
     }
+
+    localforage.setItem("cart", novoCarrinho); // Atualiza no armazenamento
+    return novoCarrinho;
   });
 
   setQuantidade(1);
   setIsModalOpen(false);
   setSelectedProduct(null);
   setStatusPedido(true);
-
-  setTimeout(() => {
-    setStatusPedido(false);
-  }, 3000);
 };
+
+const handleStatuConfirm = () => {
+  setStatusPedido((prev) => !prev);
+}
 
 
 const updatePedidoStatus = async (id, newStatus) => {
@@ -604,6 +617,8 @@ const toggleTheme = async () => {
     themeName,
     configuracao,
     statusPedido,
+    handleStatuConfirm,
+    setStatusPedido,
     updateConfiguration,
     toggleTheme,
     handleDeletePedidosPorComanda,

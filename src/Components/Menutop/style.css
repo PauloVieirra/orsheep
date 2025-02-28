@@ -154,7 +154,10 @@ input:checked + .slider:before {
 
 .cont-switch{
     display: flex;
-    width: 'auto';
+    width: 100px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
 }
 
 

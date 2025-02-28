@@ -7,6 +7,7 @@ export function Footer() {
     const {theme}= useAuth();
     return (
         <div className="footer" style={{background:theme.footerBackground}}>
+            
             <div className="footer-links">
                 <a href="https://www.linkedin.com/in/paulo-vieira-a16723210/" target="_blank" rel="noopener noreferrer">
                     <IconLinkedin size={24}/>

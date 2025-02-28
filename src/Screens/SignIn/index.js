@@ -2,11 +2,15 @@ import React, { useState, useContext } from "react";
 import { useAuth } from "../../context/AuthContext";
 import './style.css';
 
+import logo from '../../assets/images/Group8.png';
+
 export default function SigninScreen() {
   const { login } = useAuth(); // Desestrutura a função de login do contexto
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +26,8 @@ export default function SigninScreen() {
   return (
     <div className="container-signin">
       <div className="container-signintop">
-        <h2>Tela de Login</h2>
+        <img src={logo} className="logologin"/>
+        <h2>Login</h2>
       </div>
       
       <div className="formulario-signin"> 

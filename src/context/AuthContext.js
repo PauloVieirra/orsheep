@@ -33,6 +33,12 @@ export const AuthProvider = ({ children }) => {
   const [canPlaySound, setCanPlaySound] = useState(false);
   const [quantidade, setQuantidade] = useState(1);
   const [configuracao, setConfiguracao] = useState(null);
+  const [statusModulo, setStatusModulo] = useState([])
+
+  
+
+  
+  console.log(user); 
   
   /*Thema -------------------------------------------------------------------*/
   const [themeName, setThemeName] = useState('light');
@@ -42,6 +48,8 @@ export const AuthProvider = ({ children }) => {
 
  
   const navigate = useNavigate();
+
+
 
  // 🔹 Buscar configurações do Supabase ou localforage
  useEffect(() => {
@@ -65,6 +73,7 @@ export const AuthProvider = ({ children }) => {
 
       // Atualiza o estado e salva localmente
       setConfiguracao(data);
+      
       await localforage.setItem("configuracao", data);
     } catch (err) {
       setError("Erro ao buscar configurações.");
@@ -90,6 +99,12 @@ const updateConfiguration = async (key, value) => {
     console.error("Erro ao atualizar configuração:", error);
   }
 };
+
+useEffect(() => {
+  if (configuracao) {
+    setStatusModulo([configuracao.status_mesa, configuracao.status_delivery, configuracao.status_loja]);
+  }
+}, [configuracao]);
 
 
     useEffect(() => {
@@ -153,6 +168,7 @@ const saveUserLocally = async (user) => {
       id: user.id,
       email: user.email,
       role: user.role || null, // Caso o usuário tenha um papel (admin, user)
+      user_id: user.user_id|| null
     });
     console.log("Usuário salvo localmente:", user);
   } catch (err) {
@@ -225,7 +241,7 @@ const login = async (email, password) => {
     return user;
   };
 
-  const signUp = async (email, password, nome) => {
+  const signUp = async (email, password, nome, role, token) => {
     try {
       setLoading(true);
   
@@ -239,16 +255,28 @@ const login = async (email, password) => {
       // Salva o perfil na tabela `user_profiller`
       const { error: profileError } = await supabase
         .from("user_profiller")
-        .insert([{ user_id: user.id, nome, email }]);
+        .insert([{ 
+          user_id: user.id, 
+          nome, 
+          email, 
+          role, 
+          token 
+        }]);
   
       if (profileError) throw new Error("Erro ao salvar perfil: " + profileError.message);
   
-      // Salva o usuário localmente
-      await saveUserLocally(user);
-      setUser(user);
-      setIsLoggedIn(true);
+      // Se o role não for 'colaborador', salve o usuário e logue
+      if (role !== 'colaborador') {
+        // Salva o usuário localmente
+        await saveUserLocally(user);
+        setUser(user);
+        setIsLoggedIn(true);
+      } else {
+        // Caso o role seja 'colaborador', apenas mostre o status do registro
+        console.log("Novo colaborador cadastrado com sucesso!");
+        alert("Novo colaborador cadastrado com sucesso!");
+      }
   
-      console.log("Cadastro realizado com sucesso!");
       return user;
     } catch (error) {
       console.error("Erro ao fazer cadastro:", error.message);
@@ -257,6 +285,7 @@ const login = async (email, password) => {
       setLoading(false);
     }
   };
+  
 
   const logout = async () => {
     try {
@@ -478,7 +507,6 @@ const handleStatuConfirm = () => {
   setStatusPedido((prev) => !prev);
 }
 
-
 const updatePedidoStatus = async (id, newStatus) => {
   try {
     const { error } = await supabase
@@ -595,6 +623,49 @@ const toggleTheme = async () => {
     console.log('Erro ao salvar o tema:', error);
   }
 };
+
+// Adicionar uma mesa
+const adicionarMesa = async (numeroMesa) => {
+  const { data, error } = await supabase
+      .from("mesas")
+      .insert([{ numero_mesa: numeroMesa }]);
+
+  if (error) {
+      console.error("Erro ao adicionar mesa:", error.message);
+      return { success: false, message: error.message };
+  }
+
+  return { success: true, data };
+};
+
+// Remover uma mesa
+ const removerMesa = async (mesaId) => {
+  const { error } = await supabase
+      .from("mesas")
+      .delete()
+      .eq("id", mesaId);
+
+  if (error) {
+      console.error("Erro ao remover mesa:", error.message);
+      return { success: false, message: error.message };
+  }
+
+  return { success: true };
+};
+
+// Listar todas as mesas
+const listarMesas = async () => {
+  const { data, error } = await supabase
+      .from("mesas")
+      .select("*");
+
+  if (error) {
+      console.error("Erro ao buscar mesas:", error.message);
+      return [];
+  }
+
+  return data;
+};
   
 
   return (
@@ -617,6 +688,10 @@ const toggleTheme = async () => {
     themeName,
     configuracao,
     statusPedido,
+    statusModulo,
+    removerMesa,
+    listarMesas,
+    adicionarMesa,
     handleStatuConfirm,
     setStatusPedido,
     updateConfiguration,

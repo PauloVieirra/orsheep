@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { FaHome, FaBox, FaTag, FaCog } from "react-icons/fa"; // Exemplo de ícones
 import { IconMenuVClose, IconMenuVOpen } from "../Icons";
+
 import './styles.css';
 
 export default function Menus() {
@@ -21,14 +22,16 @@ export default function Menus() {
                 <>
                     <BotaoMenu texto="Início" onClick={() => navigate("/")} icone={<FaHome />} />
                     <BotaoMenu texto="Produtos" onClick={() => navigate("/Produtos")} icone={<FaBox />} />
-                    <BotaoMenu texto="Promoções" onClick={() => navigate("/Promocoes")} icone={<FaTag />} />
+                    <BotaoMenu texto="Mesas" onClick={() => navigate("/Mesas")} icone={<FaTag />} />
+                    <BotaoMenu texto="Colaborador" onClick={() => navigate("/CadastroAdm")} icone={<FaTag />} />
                     <BotaoMenu texto="Configurações" onClick={() => navigate("/Configuracoes")} icone={<FaCog />} />
                 </>
             ) : (
                 <>
                     <BotaoMenu onClick={() => navigate("/")} icone={<FaHome />} />
                     <BotaoMenu onClick={() => navigate("/Produtos")} icone={<FaBox />} />
-                    <BotaoMenu onClick={() => navigate("/Promocoes")} icone={<FaTag />} />
+                    <BotaoMenu onClick={() => navigate("/Mesas")} icone={<FaTag />} />
+                    <BotaoMenu onClick={() => navigate("/CadastroAdm")} icone={<FaTag />} />
                     <BotaoMenu onClick={() => navigate("/Configuracoes")} icone={<FaCog />} />
                 </>
             )}

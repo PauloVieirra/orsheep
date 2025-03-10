@@ -119,6 +119,18 @@ export default function Configuracoes() {
         </label>
       </div>
 
+      <div className="setting-item">
+        <span>Modo Cardapio</span>
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={configuracao.status_loja}
+            onChange={() => updateConfiguration("status_loja", !configuracao.status_loja)}
+          />
+          <span className="slider"></span>
+        </label>
+      </div>
+
 
       {canPlaySound ? <button onClick={handlePlay}>Desativa Som de Notificação</button> : <button onClick={handlePlay}>Ativar Som de Notificação</button> }
       <button onClick={logout}>Sair</button>

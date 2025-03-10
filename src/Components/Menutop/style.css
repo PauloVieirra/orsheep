@@ -160,6 +160,27 @@ input:checked + .slider:before {
     justify-content: center;
 }
 
+.aviso {
+    display: none;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* Responsividade */
+@media (min-width: 580px) {
+    .aviso {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+  
+}
+
 
 
  

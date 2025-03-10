@@ -7,8 +7,12 @@ import './style.css';
 
 
 export function Menutop() {
-    const { cliente, handleMenu, theme, themeName, toggleTheme, configuracao } = useAuth();
+
+    const { cliente, statusModulo, theme, themeName, toggleTheme, configuracao } = useAuth();
+
     const navigate = useNavigate();
+
+    
 
 
     return (
@@ -17,7 +21,7 @@ export function Menutop() {
 
                 <div className="cont-btnsmenus">
 
-                    {cliente ? cliente.mesa && cliente.comanda && configuracao.status_mesa === true && (
+                    {cliente ? cliente.mesa && cliente.comanda && configuracao?.status_mesa === true && (
                         <>
                             <h4 style={{ color: theme.textGeral }}>Mesa {cliente?.mesa}</h4>
                             <h4 style={{ color: theme.textGeral }}>Comanda {cliente?.comanda}</h4>
@@ -29,7 +33,7 @@ export function Menutop() {
                     )}
 
 
-                    {!cliente ? configuracao.status_delivery === true && (
+                    {!cliente ? configuracao?.status_delivery === true && (
                         <div style={{display:'flex', height:'100%', justifyContent:'center', alignItems:'center'}}>
                             <button onClick={() => navigate('./Cart')}  className="btn-voltar">
                                 <IconCart /> 
@@ -53,8 +57,8 @@ export function Menutop() {
 
                     </div>
 
-
-                
+                 
+                <div className="aviso">Por gentileza, acessar de um aparelho móvel</div>
 
 
 
